@@ -1,4 +1,6 @@
+import { TemplateRef } from "@angular/core";
 import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ChecklistService } from "./checklist.service";
 
 @Component({
@@ -26,14 +28,24 @@ export class ChecklistComponent implements OnInit {
   theResult = 0;
   enemySelected = -1;
 
-  constructor(private checklist: ChecklistService) {}
+  @ViewChild("start", { static: true }) start: TemplateRef<any>;
+
+  constructor(private checklist: ChecklistService, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.loading = true;
+    this.open(this.start);
 
     this.checklist.getUserChecklist().subscribe(data => {
       this.userChecklist = data;
       this.loading = false;
+    });
+  }
+
+  open(content) {
+    this.modalService.open(content, {
+      ariaLabelledBy: "modal-basic-title",
+      centered: true,
     });
   }
 

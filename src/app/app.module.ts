@@ -27,6 +27,7 @@ import { ErrorInterceptor } from "./services/authentication/error.interceptor";
 
 import { AuthenticationService } from "./services/authentication/authentication.service";
 import { UserService } from "./services/user/user.service";
+import { GamificationComponent } from './modules/gamification/gamification.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,8 @@ import { UserService } from "./services/user/user.service";
     AboutComponent,
     LoginComponent,
     DashboardComponent,
-    ChecklistComponent
+    ChecklistComponent,
+    GamificationComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

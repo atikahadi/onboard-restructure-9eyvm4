@@ -8,6 +8,7 @@ import { AboutComponent } from "./modules/about/about.component";
 import { LoginComponent } from "./modules/login/login.component";
 import { DashboardComponent } from "./modules/dashboard/dashboard.component";
 import { ChecklistComponent } from "./modules/checklist/checklist.component";
+import { GamificationComponent } from './modules/gamification/gamification.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: "checklist",
     component: ChecklistComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "gamification",
+    component: GamificationComponent,
     canActivate: [AuthGuard]
   },
   { path: "**", redirectTo: "" }

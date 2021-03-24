@@ -27,3 +27,38 @@
 .konami .btn-link.selectedWeapon {
   color: #3700b3;
 }
+
+.pixel-font {
+  font-family: "Press Start 2P", cursive;
+}
+
+.pixel-font-light {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+}
+
+.btn-pixel:active {
+  box-shadow: none;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.btn-pixel {
+  background: #fff;
+  border: 3px solid #009bdf !important;
+  color: #009bdf;
+  font-size: 14px;
+  border-radius: 0;
+  padding: 10px 30px;
+  box-shadow: 3px 3px 0 #000000;
+}
+
+.modal-content {
+  box-shadow: 5px 5px 0 #000000 !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0;
+}
+
+.modal-header {
+  border-bottom: 3px solid #000000 !important;
+}
