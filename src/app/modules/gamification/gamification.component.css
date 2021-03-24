@@ -16,24 +16,21 @@
 
 .level-bg {
   background: #000000;
-  height: 20px;
+  height: 18px;
   border-radius: 20px;
 }
 
 .level {
   background: #009bdf;
-  height: 20px;
+  height: 18px;
   border-radius: 20px;
   border: 2px solid #000000;
 }
 
 button {
   border: none !important;
-  font-size: 10px;
-  background: #793680;
   border-radius: 0;
   padding: 10px 30px;
-  box-shadow: 3px 3px 0 #000000;
 }
 
 button:active {
@@ -47,6 +44,7 @@ button:active {
   border: 3px solid #009bdf !important;
   color: #009bdf;
   font-size: 14px;
+  box-shadow: 3px 3px 0 #000000;
 }
 
 .btn-pixel-primary {
@@ -54,6 +52,14 @@ button:active {
   border: 3px solid #009bdf !important;
   color: #fff;
   font-size: 14px;
+  box-shadow: 3px 3px 0 #000000;
+}
+
+.btn-pixel-shop {
+  font-size: 12px;
+  background: #793680;
+  color: #fff;
+  box-shadow: 3px 3px 0 #000000;
 }
 
 .modal-content {
