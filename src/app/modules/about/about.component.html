@@ -1,0 +1,66 @@
+<div class="d-flex align-items-center justify-content-center w-100 h-100" *ngIf="loading">
+	<app-loader></app-loader>
+</div>
+
+<main id="about" *ngFor="let section of data">
+	<app-header title="{{ section.header.title }}" description="{{ section.header.description }}"></app-header>
+
+	<!-- Vision & Mission -->
+	<section class="container-fluid d-flex flex-column position-relative" style="background-color: #164396">
+		<div class="container py-5">
+			<div class="row d-flex align-items-center mb-5">
+				<div class="col-lg-8">
+					<div *ngFor="let company of section.page[0].contents" class="mb-5">
+						<h3 class="font-weight-bold text-white">
+							{{ company.title }}
+						</h3>
+						<p class="h5 font-italic text-white">
+							{{ company.subtitle }}
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="compass" role="img"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"
+						class="svg-inline--fa fa-compass fa-w-16 fa-3x">
+						<path fill="#fff"
+							d="M347.94 129.86L203.6 195.83a31.938 31.938 0 0 0-15.77 15.77l-65.97 144.34c-7.61 16.65 9.54 33.81 26.2 26.2l144.34-65.97a31.938 31.938 0 0 0 15.77-15.77l65.97-144.34c7.61-16.66-9.54-33.81-26.2-26.2zm-77.36 148.72c-12.47 12.47-32.69 12.47-45.16 0-12.47-12.47-12.47-32.69 0-45.16 12.47-12.47 32.69-12.47 45.16 0 12.47 12.47 12.47 32.69 0 45.16zM248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 448c-110.28 0-200-89.72-200-200S137.72 56 248 56s200 89.72 200 200-89.72 200-200 200z"
+							class=""></path>
+					</svg>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- What we stand for -->
+	<section class="container d-flex flex-column position-relative">
+		<h3 class="font-weight-bold text-center text-uppercase mt-5 mb-3">
+			What we stand for
+		</h3>
+		<p class="text-center">Everyone of us is here to make a difference</p>
+
+		<div class="row d-flex justify-content-center mb-5">
+			<div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let goal of section.page[1].contents">
+				<p class="text-center">
+					{{ goal.title }}
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Hear from your Seniors -->
+	<section class="container d-flex flex-column position-relative">
+		<h3 class="font-weight-bold text-center text-uppercase mt-5 mb-3">Hear from your Seniors</h3>
+
+		<div class="row d-flex justify-content-center mb-5">
+			<div class="col-sm-4 col-md-4 col-lg-3 mb-3" *ngFor="let senior of section.page[2].contents">
+				<div class="card shadow h-100">
+					<div class="card-body">
+						<p class="card-text font-italic text-center" [innerHtml]="senior.content"></p>
+						<p class="card-text font-weight-bold text-center">{{ senior.title }}, {{ senior.subtitle }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>

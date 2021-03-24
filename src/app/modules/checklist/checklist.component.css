@@ -1,0 +1,29 @@
+.konami {
+  background-color: #121212;
+  color: #fff;
+  font-family: monospace !important;
+  min-height: 100%;
+}
+
+.konami .card {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+
+.konami .list-group-item {
+  background-color: transparent;
+  color: #fff;
+}
+
+.konami .btn-link {
+  color: #fff;
+}
+
+.konami .btn-link:hover {
+  color: #bb86fc;
+}
+
+.konami .btn-link.selectedWeapon {
+  color: #3700b3;
+}

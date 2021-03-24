@@ -1,0 +1,24 @@
+#explore ol.carousel-indicators {
+  bottom: -3rem !important;
+}
+
+#explore ol.carousel-indicators li {
+  background-color: #ccc;
+}
+
+#explore ol.carousel-indicators li.active {
+  background-color: #009bdf;
+}
+
+#explore .carousel-control-prev,
+#explore .carousel-control-next {
+  width: 2rem;
+}
+
+#explore .carousel-control-prev {
+  left: -1rem;
+}
+
+#explore .carousel-control-next {
+  right: -1rem;
+}

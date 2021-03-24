@@ -1,0 +1,10 @@
+/* Lottie */
+.lottie-scale {
+  height: 175px;
+}
+
+@media (min-width: 1200px) {
+  .lottie-scale {
+    height: 220px;
+  }
+}

@@ -1,0 +1,80 @@
+<div class="d-flex align-items-center justify-content-center w-100 h-100" *ngIf="loading">
+	<app-loader></app-loader>
+</div>
+
+<main class="d-flex min-vh-100">
+	<div class="d-flex flex-column flex-md-row no-gutters w-100">
+		<div class="container position-absolute w-50" style="z-index: 100">
+			<div class="row align-items-start pt-3 px-3">
+				<div class="text-left">
+					<a aria-current="page" class="navbar-brand py-0 mr-0" routerLink="/" style="height: 3rem">
+						<img
+              src="https://celcomdesign.gitlab.io/system/iconography/svg/logo/logo-celcom.svg"
+              alt="Celcom Onboarding"
+              style="height: inherit;"
+              title="Celcom Onboarding"
+            />
+          </a>
+				</div>
+			</div>
+		</div>
+
+		<div class="d-flex flex-column justify-content-center col-md-8 min-vh-100 h-100 bg-white">
+			<div class="container-fluid">
+				<div class="embed-responsive">
+					<lottie-player src="https://assets9.lottiefiles.com/packages/lf20_HjK9Ol.json" class="mx-auto"
+						style="height: 400px"></lottie-player>
+				</div>
+			</div>
+			<div class="container-fluid px-md-5">
+				<p class="h6 mb-md-0 mb-0 text-uppercase" style="margin-left: 0.2em">
+					Welcome onboard to
+				</p>
+				<h1 class="display-4 text-uppercase font-weight-bold">Celcom Axiata</h1>
+
+				<button type="button" class="btn btn-default btn-primary btn-lg">
+          Get started
+        </button>
+				<p class="d-flex mt-3 mb-0">
+					Already onboarded?&nbsp;
+					<a class="d-block font-weight-bold" routerLink="/login" role="button"> Log in here</a>.
+				</p>
+			</div>
+		</div>
+
+		<div class="d-flex flex-column col-md-4 col-md-4 min-vh-100 h-100">
+			<div class="d-flex flex-column bg-indigo text-light h-50"
+				style="background-image: linear-gradient(#793680 0%, #3b6ab0 100%) !important; border-bottom: 1px solid rgba(255,255,255,0.25);">
+				<div class="container-fluid pt-3 pt-xl-4 px-xl-4">
+					<p class="small mb-0 text-uppercase">Where is...uhmm..</p>
+					<h3 class="text-uppercase font-weight-bold">Explore @celcom</h3>
+					<button
+            class="btn btn-default btn-outline-white"
+            routerLink="/explore"
+          >
+            Let's Go
+          </button>
+				</div>
+				<div class="embed-responsive my-auto">
+					<lottie-player class="lottie-scale"
+						src="https://assets10.lottiefiles.com/packages/lf20_QIvVpl.json"></lottie-player>
+				</div>
+			</div>
+
+			<div class="d-flex flex-column bg-blue text-light h-50"
+				style="background-image: linear-gradient(#3b6ab0 0%, #009bdf 100%) !important; border-top: 1px solid rgba(255,255,255,0.25);">
+				<div class="container-fluid pt-3 pt-xl-4 px-xl-4">
+					<p class="small mb-0 text-uppercase">What..Who..Why?</p>
+					<h3 class="text-uppercase font-weight-bold">About Us</h3>
+					<button class="btn btn-default btn-outline-white" routerLink="/about">
+            Enlighten me
+          </button>
+				</div>
+				<div class="embed-responsive my-auto">
+					<lottie-player class="lottie-scale" src="https://assets7.lottiefiles.com/packages/lf20_MeTWrj.json"
+						background="transparent" speed="1" loop autoplay></lottie-player>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

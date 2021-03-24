@@ -1,0 +1,51 @@
+<div class="d-flex align-items-center justify-content-center w-100 h-100" *ngIf="loading">
+	<app-loader></app-loader>
+</div>
+
+<main class="d-flex min-vh-100">
+	<div class="d-flex flex-column flex-md-row no-gutters w-100">
+		<div class="container position-absolute w-50" style="z-index: 100">
+			<div class="row align-items-start pt-3 px-3">
+				<div class="text-left">
+					<a aria-current="page" class="navbar-brand py-0 mr-0" routerLink="/" style="height: 3rem">
+						<img
+              src="https://celcomdesign.gitlab.io/system/iconography/svg/logo/logo-celcom.svg"
+              alt="Celcom Onboarding"
+              style="height: inherit;"
+              title="Celcom Onboarding"
+            />
+          </a>
+				</div>
+			</div>
+		</div>
+
+		<div class="d-flex flex-column justify-content-center col-md-8 min-vh-100 h-100 bg-white">
+			<div class="container-fluid px-md-5">
+				<p class="h6 mb-md-0 mb-0 text-uppercase" style="margin-left: 0.2em">
+					Hello there
+				</p>
+				<h1 class="display-4 text-uppercase font-weight-bold" *ngFor="let user of users">
+					{{user.firstName}} {{user.lastName}}
+				</h1>
+			</div>
+		</div>
+
+		<div class="d-flex flex-column col-md-4 col-md-4 min-vh-100 h-100">
+			<div class="d-flex flex-column bg-indigo text-light h-50"
+				style="background-image: linear-gradient(#793680 0%, #3b6ab0 100%) !important; border-bottom: 1px solid rgba(255,255,255,0.25);">
+				<div class="container-fluid pt-3 pt-xl-4 px-xl-4">
+					<p class="small mb-0 text-uppercase">Gotta go fast!</p>
+					<h3 class="text-uppercase font-weight-bold">Quick links</h3>
+				</div>
+			</div>
+
+			<div class="d-flex flex-column bg-blue text-light h-50"
+				style="background-image: linear-gradient(#3b6ab0 0%, #009bdf 100%) !important; border-top: 1px solid rgba(255,255,255,0.25);">
+				<div class="container-fluid pt-3 pt-xl-4 px-xl-4">
+					<p class="small mb-0 text-uppercase">Know it all</p>
+					<h3 class="text-uppercase font-weight-bold">Explore @celcom</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

@@ -1,0 +1,22 @@
+<header class="container-fluid d-flex flex-column" style="z-index: 101">
+  <div class="py-3 w-50" style="z-index: 100">
+    <a aria-current="page" routerLink="/" style="height: 3rem" id="logo">
+      <img
+        src="https://celcomdesign.gitlab.io/system/iconography/svg/logo/logo-celcom.svg"
+        alt="Celcom Onboarding"
+        style="height: inherit;"
+        title="Celcom Onboarding"
+      />
+    </a>
+  </div>
+</header>
+
+<div
+  class="jumbotron rounded-0 bg-transparent"
+  ngstyle="{ 'background-image': 'url (' + image + ')' }"
+>
+  <div class="container">
+    <h1 class="font-weight-bold">{{ title }}</h1>
+    <h5>{{ description }}</h5>
+  </div>
+</div>
