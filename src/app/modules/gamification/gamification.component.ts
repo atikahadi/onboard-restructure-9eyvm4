@@ -26,4 +26,8 @@ export class GamificationComponent implements OnInit {
       centered: true,
     });
   }
+
+  // openWindowCustomClass(shopModal) {
+  //   this.modalService.open(shopModal, { windowClass: 'shopModal' });
+  // }
 }
