@@ -6,17 +6,6 @@
 
 .pixel-font-light {
   font-family: "Courier New", Courier, monospace;
-  font-size: 20px;
-}
-
-p {
-  font-family: 'Courier New', Courier, monospace;
-}
-
-a {
-  font-family: 'Courier New',
-  Courier,
-  monospace;
 }
 
 .icon {
@@ -37,7 +26,7 @@ a {
   border: 2px solid #000000;
 }
 
-.look{
+.look {
   border: 1px solid #ccc;
   box-shadow: 0px 3px 6px #ccc;
 }
@@ -87,7 +76,6 @@ button:active {
   border-bottom: 3px solid #000000 !important;
 }
 
-
 .line {
   border-top: 3px solid;
   width: 284px;
@@ -97,9 +85,8 @@ button:active {
   border-color: #612b66;
 }
 
-.card {
+.card-pixel {
   border: 2px solid #000000;
-  
 }
 /* .shopModal .modal-dialog{
   max-width: 1000px;
