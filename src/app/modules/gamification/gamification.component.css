@@ -37,6 +37,11 @@ a {
   border: 2px solid #000000;
 }
 
+.look{
+  border: 1px solid #ccc;
+  box-shadow: 0px 3px 6px #ccc;
+}
+
 button {
   border: none !important;
   border-radius: 0;
@@ -96,3 +101,6 @@ button:active {
   border: 2px solid #000000;
   
 }
+/* .shopModal .modal-dialog{
+  max-width: 1000px;
+} */
