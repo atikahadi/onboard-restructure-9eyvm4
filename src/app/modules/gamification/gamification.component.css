@@ -91,3 +91,8 @@ button:active {
 /* .shopModal .modal-dialog{
   max-width: 1000px;
 } */
+
+::ng-deep .modal-dialog.modal-dialog-centered {
+  max-width: 100%;
+  width: 100% !important;
+}

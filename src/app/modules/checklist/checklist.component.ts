@@ -9,7 +9,7 @@ import { ChecklistService } from "./checklist.service";
   selector: "app-checklist",
   templateUrl: "./checklist.component.html",
   styleUrls: ["./checklist.component.css"],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ChecklistComponent implements OnInit {
   public userChecklist;
@@ -32,19 +32,23 @@ export class ChecklistComponent implements OnInit {
 
   @ViewChild("start", { static: true }) start: TemplateRef<any>;
 
-  constructor(private checklist: ChecklistService, private router: Router, private modalService: NgbModal,
-    private authenticationService: AuthenticationService) {}
+  constructor(
+    private checklist: ChecklistService,
+    private router: Router,
+    private modalService: NgbModal,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
-    console.log(this.authenticationService.currentUserValue.game)
+    console.log(this.authenticationService.currentUserValue.game);
     if (this.authenticationService.currentUserValue.game == true) {
-      this.router.navigate(['/gamification']);
+      this.router.navigate(["/gamification"]);
     } else {
       this.open(this.start);
     }
     this.loading = true;
 
-    this.checklist.getUserChecklist().subscribe(data => {
+    this.checklist.getUserChecklist().subscribe((data) => {
       this.userChecklist = data;
       this.loading = false;
     });
