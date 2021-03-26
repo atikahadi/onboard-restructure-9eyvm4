@@ -1,6 +1,8 @@
 import { TemplateRef } from "@angular/core";
 import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { AuthenticationService } from "app/services/authentication/authentication.service";
 import { ChecklistService } from "./checklist.service";
 
 @Component({
@@ -30,11 +32,17 @@ export class ChecklistComponent implements OnInit {
 
   @ViewChild("start", { static: true }) start: TemplateRef<any>;
 
-  constructor(private checklist: ChecklistService, private modalService: NgbModal) {}
+  constructor(private checklist: ChecklistService, private router: Router, private modalService: NgbModal,
+    private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
+    console.log(this.authenticationService.currentUserValue.game)
+    if (this.authenticationService.currentUserValue.game == true) {
+      this.router.navigate(['/gamification']);
+    } else {
+      this.open(this.start);
+    }
     this.loading = true;
-    this.open(this.start);
 
     this.checklist.getUserChecklist().subscribe(data => {
       this.userChecklist = data;

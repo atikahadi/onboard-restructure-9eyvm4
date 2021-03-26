@@ -4,6 +4,7 @@
     "username":"test",
     "password":"test",
     "firstName":"Test",
-    "lastName":"User"
+    "lastName":"User",
+    "game": false
   }
 ]

@@ -18,7 +18,8 @@ const users: User[] = [
     username: "test",
     password: "test",
     firstName: "Test",
-    lastName: "User"
+    lastName: "User",
+    game: false
   }
 ];
 
@@ -62,7 +63,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
-        token: "fake-jwt-token"
+        token: "fake-jwt-token",
+        game: user.game
       });
     }
 
