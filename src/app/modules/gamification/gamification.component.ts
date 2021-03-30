@@ -5,6 +5,9 @@ import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AuthenticationService } from "app/services/authentication/authentication.service";
 import { ChecklistService } from "../checklist/checklist.service";
+import { first } from "rxjs/operators";
+import { User } from "../../services/user/user.model";
+import { UserService } from "../../services/user/user.service";
 
 @Component({
   selector: "app-gamification",
@@ -22,10 +25,11 @@ export class GamificationComponent implements OnInit {
   playerSelected = -1;
   isResultShow = false;
   isLoading = false;
+  users: User[];
 
   //Checklist
   public userChecklists;
-  public filteredTag = 'Pre-Onboarding';
+  public filteredTag = "Pre-Onboarding";
   public allPre = 0;
   public checkPre = 0;
   public checkPreDb = 0;
@@ -45,6 +49,7 @@ export class GamificationComponent implements OnInit {
     private modalService: NgbModal,
     private authenticationService: AuthenticationService,
     private checklist: ChecklistService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -54,18 +59,30 @@ export class GamificationComponent implements OnInit {
       this.popup = false;
     }
 
+    this.userService
+      .getAll()
+      .pipe(first())
+      .subscribe((users) => {
+        this.loading = false;
+        this.users = users;
+      });
+
     //Checklist
     this.checklist.getUserChecklist().subscribe((data) => {
       this.userChecklists = data;
-      
+
       for (var i = 0; i < this.userChecklists[0]?.lists.length; i++) {
         if (this.userChecklists[0].lists[i].checked == true) {
-          if (this.userChecklists[0].lists[i].tags[0].title == 'Pre-Onboarding') {
+          if (
+            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
+          ) {
             this.checkPreDb++;
             this.allPre++;
           }
         } else {
-          if (this.userChecklists[0].lists[i].tags[0].title == 'Pre-Onboarding') {
+          if (
+            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
+          ) {
             this.allPre++;
           }
         }
@@ -78,35 +95,41 @@ export class GamificationComponent implements OnInit {
         this.userChecklists[0].completed = true;
       }
       this.checkPre = this.checkPreDb;
-  });
-}
+    });
+  }
 
-//Checklist Checkbox
+  //Checklist Checkbox
 
-onCheckboxChange(e) {
+  onCheckboxChange(e) {
     for (var i = 0; i < this.userChecklists[0].lists.length; i++) {
       if (e.target.value == this.userChecklists[0].lists[i].id) {
         this.userChecklists[0].lists[i].checked = e.target.checked;
 
-        this.targetID = new Array(50).fill(this.userChecklists[0].lists[i].tags[0].title);
+        this.targetID = new Array(50).fill(
+          this.userChecklists[0].lists[i].tags[0].title
+        );
 
         if (e.target.checked == true) {
-          if (this.targetID[0] == 'Pre-Onboarding') {
+          if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow++;
             this.checkPre = this.checkPreDb + this.checkPreNow;
           }
 
           if (this.userChecklists[0].lists[i].tags.length == 2) {
-            this.targetID1 = new Array(50).fill(this.userChecklists[0].lists[i].tags[1].title);
+            this.targetID1 = new Array(50).fill(
+              this.userChecklists[0].lists[i].tags[1].title
+            );
           }
         } else if (e.target.checked == false) {
-          if (this.targetID[0] == 'Pre-Onboarding') {
+          if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow--;
             this.checkPre = this.checkPreDb + this.checkPreNow;
           }
 
           if (this.userChecklists[0].lists[i].tags.length == 2) {
-            this.targetID1 = new Array(50).fill(this.userChecklists[0].lists[i].tags[1].title);
+            this.targetID1 = new Array(50).fill(
+              this.userChecklists[0].lists[i].tags[1].title
+            );
           }
         }
 
@@ -202,5 +225,3 @@ onCheckboxChange(e) {
   //   this.modalService.open(shopModal, { windowClass: 'shopModal' });
   // }
 }
-
-
