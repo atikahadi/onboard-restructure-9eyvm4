@@ -28,6 +28,7 @@ import { ErrorInterceptor } from "./services/authentication/error.interceptor";
 import { AuthenticationService } from "./services/authentication/authentication.service";
 import { UserService } from "./services/user/user.service";
 import { GamificationComponent } from './modules/gamification/gamification.component';
+import { FilterPipe } from './utilities/filter/filter.pipe';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { GamificationComponent } from './modules/gamification/gamification.compo
     LoginComponent,
     DashboardComponent,
     ChecklistComponent,
-    GamificationComponent
+    GamificationComponent,
+    FilterPipe
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

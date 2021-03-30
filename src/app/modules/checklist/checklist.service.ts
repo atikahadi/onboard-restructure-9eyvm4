@@ -23,6 +23,19 @@ export class ChecklistService {
       .pipe(catchError(this.handleError<UserChecklist>("getUserChecklist")));
   }
 
+  updateUserChecklists(
+    userchecklist: UserChecklist,
+  ): Observable<void> {
+    return this.http
+      .put<void>(this.apiUrl, {
+        lists: userchecklist[0].lists,
+        completed: userchecklist[0].completed,
+        completedDate: userchecklist[0].completedDate,
+        surveyComplete: userchecklist[0].surveyComplete,
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

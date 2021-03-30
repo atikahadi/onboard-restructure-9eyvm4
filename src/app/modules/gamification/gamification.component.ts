@@ -4,6 +4,7 @@ import { ViewChild } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AuthenticationService } from "app/services/authentication/authentication.service";
+import { ChecklistService } from "../checklist/checklist.service";
 
 @Component({
   selector: "app-gamification",
@@ -20,13 +21,30 @@ export class GamificationComponent implements OnInit {
   weapons = ["rock", "paper", "scissors"];
   playerSelected = -1;
   isResultShow = false;
+  isLoading = false;
+
+  //Checklist
+  public userChecklists;
+  public filteredTag = 'Pre-Onboarding';
+  public allPre = 0;
+  public checkPre = 0;
+  public checkPreDb = 0;
+  public checkPreNow = 0;
+  public targetID: Array<string>;
+  public targetID1: Array<string>;
+  disabledPreOnboardingList: boolean = true;
+  disabledCompleteButton: boolean = true;
+  list: any;
+  current: number;
+  mobile: boolean = false;
 
   theResult = 0;
   enemySelected = -1;
   @ViewChild("gender", { static: true }) gender: TemplateRef<any>;
   constructor(
     private modalService: NgbModal,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private checklist: ChecklistService,
   ) {}
 
   ngOnInit() {
@@ -34,6 +52,71 @@ export class GamificationComponent implements OnInit {
       this.open(this.gender, "md");
     } else {
       this.popup = false;
+    }
+
+    //Checklist
+    this.checklist.getUserChecklist().subscribe((data) => {
+      this.userChecklists = data;
+      
+      for (var i = 0; i < this.userChecklists[0]?.lists.length; i++) {
+        if (this.userChecklists[0].lists[i].checked == true) {
+          if (this.userChecklists[0].lists[i].tags[0].title == 'Pre-Onboarding') {
+            this.checkPreDb++;
+            this.allPre++;
+          }
+        } else {
+          if (this.userChecklists[0].lists[i].tags[0].title == 'Pre-Onboarding') {
+            this.allPre++;
+          }
+        }
+        this.isLoading = false;
+
+        if (this.checkPreDb != this.allPre) {
+          this.disabledPreOnboardingList = false;
+          this.disabledCompleteButton = true;
+        }
+        this.userChecklists[0].completed = true;
+      }
+      this.checkPre = this.checkPreDb;
+  });
+}
+
+//Checklist Checkbox
+
+onCheckboxChange(e) {
+    for (var i = 0; i < this.userChecklists[0].lists.length; i++) {
+      if (e.target.value == this.userChecklists[0].lists[i].id) {
+        this.userChecklists[0].lists[i].checked = e.target.checked;
+
+        this.targetID = new Array(50).fill(this.userChecklists[0].lists[i].tags[0].title);
+
+        if (e.target.checked == true) {
+          if (this.targetID[0] == 'Pre-Onboarding') {
+            this.checkPreNow++;
+            this.checkPre = this.checkPreDb + this.checkPreNow;
+          }
+
+          if (this.userChecklists[0].lists[i].tags.length == 2) {
+            this.targetID1 = new Array(50).fill(this.userChecklists[0].lists[i].tags[1].title);
+          }
+        } else if (e.target.checked == false) {
+          if (this.targetID[0] == 'Pre-Onboarding') {
+            this.checkPreNow--;
+            this.checkPre = this.checkPreDb + this.checkPreNow;
+          }
+
+          if (this.userChecklists[0].lists[i].tags.length == 2) {
+            this.targetID1 = new Array(50).fill(this.userChecklists[0].lists[i].tags[1].title);
+          }
+        }
+
+        this.checklist.updateUserChecklists(this.userChecklists).subscribe(
+          () => {},
+          (error: any) => {
+            console.log(error);
+          }
+        );
+      }
     }
   }
 
@@ -119,3 +202,5 @@ export class GamificationComponent implements OnInit {
   //   this.modalService.open(shopModal, { windowClass: 'shopModal' });
   // }
 }
+
+
