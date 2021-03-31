@@ -210,7 +210,11 @@ export class GamificationComponent implements OnInit {
           }
         );
       }
-    }
+    } 
+  }
+
+  completePreOnboardingList() {
+    this.disabledPreOnboardingList = true;
   }
 
   open(content, dialogSize) {
