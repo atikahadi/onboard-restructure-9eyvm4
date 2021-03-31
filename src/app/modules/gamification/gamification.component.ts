@@ -5,6 +5,11 @@ import { Component, OnInit } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AuthenticationService } from "app/services/authentication/authentication.service";
 import { ChecklistService } from "../checklist/checklist.service";
+import { first } from "rxjs/operators";
+import { User } from "../../services/user/user.model";
+import { UserService } from "../../services/user/user.service";
+import mergeImages from "merge-images";
+import { saveAs } from "file-saver";
 
 @Component({
   selector: "app-gamification",
@@ -22,10 +27,14 @@ export class GamificationComponent implements OnInit {
   playerSelected = -1;
   isResultShow = false;
   isLoading = false;
+  public user;
+  femalePath: string;
+  // malePath = "assets/avatar/male/";
+  avatarSrc;
 
   //Checklist
   public userChecklists;
-  public filteredTag = 'Pre-Onboarding';
+  public filteredTag = "Pre-Onboarding";
   public allPre = 0;
   public checkPre = 0;
   public checkPreDb = 0;
@@ -37,6 +46,9 @@ export class GamificationComponent implements OnInit {
   list: any;
   current: number;
   mobile: boolean = false;
+  i = 1;
+  j = 1;
+  k = 1;
 
   theResult = 0;
   enemySelected = -1;
@@ -45,6 +57,7 @@ export class GamificationComponent implements OnInit {
     private modalService: NgbModal,
     private authenticationService: AuthenticationService,
     private checklist: ChecklistService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -53,19 +66,34 @@ export class GamificationComponent implements OnInit {
     } else {
       this.popup = false;
     }
+    this.femalePath =
+      "assets/avatar/" +
+      this.authenticationService.currentUserValue.gender +
+      "/";
+
+    // this.userService
+    //   .getAll()
+    //   .pipe(first())
+    //   .subscribe((users) => {
+    this.user = this.authenticationService.currentUserValue;
+    // });
 
     //Checklist
     this.checklist.getUserChecklist().subscribe((data) => {
       this.userChecklists = data;
-      
+
       for (var i = 0; i < this.userChecklists[0]?.lists.length; i++) {
         if (this.userChecklists[0].lists[i].checked == true) {
-          if (this.userChecklists[0].lists[i].tags[0].title == 'Pre-Onboarding') {
+          if (
+            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
+          ) {
             this.checkPreDb++;
             this.allPre++;
           }
         } else {
-          if (this.userChecklists[0].lists[i].tags[0].title == 'Pre-Onboarding') {
+          if (
+            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
+          ) {
             this.allPre++;
           }
         }
@@ -78,35 +106,100 @@ export class GamificationComponent implements OnInit {
         this.userChecklists[0].completed = true;
       }
       this.checkPre = this.checkPreDb;
-  });
-}
+    });
+  }
 
-//Checklist Checkbox
+  setGender(item) {
+    this.authenticationService.currentUserValue.gender = item;
+    var json = JSON.parse(localStorage.getItem("currentUser"));
+    json.gender = item;
+    localStorage.setItem("currentUser", JSON.stringify(json));
+    this.femalePath =
+      "assets/avatar/" +
+      this.authenticationService.currentUserValue.gender +
+      "/";
+    this.createAvatar();
+  }
 
-onCheckboxChange(e) {
+  changeHair(index) {
+    if (index == 0) {
+      this.i = 33;
+    } else if (index == 34) {
+      this.i = 1;
+    } else {
+      this.i = index;
+    }
+    this.createAvatar();
+  }
+
+  changeFace(index) {
+    if (index == 0) {
+      this.j = 4;
+    } else if (index == 5) {
+      this.j = 1;
+    } else {
+      this.j = index;
+    }
+    this.createAvatar();
+  }
+
+  changeClothes(index) {
+    if (index == 0) {
+      this.k = 59;
+    } else if (index == 60) {
+      this.k = 1;
+    } else {
+      this.k = index;
+    }
+    this.createAvatar();
+  }
+
+  createAvatar() {
+    mergeImages([
+      this.femalePath + "face" + this.j + ".png",
+      this.femalePath + "head" + this.i + ".png",
+      this.femalePath + "clothes" + this.k + ".png",
+    ]).then((b64) => {
+      this.avatarSrc = b64;
+      var json = JSON.parse(localStorage.getItem("currentUser"));
+      json.avatar = this.avatarSrc;
+      localStorage.setItem("currentUser", JSON.stringify(json));
+      this.authenticationService.currentUserValue.avatar = this.avatarSrc;
+    });
+  }
+
+  //Checklist Checkbox
+
+  onCheckboxChange(e) {
     for (var i = 0; i < this.userChecklists[0].lists.length; i++) {
       if (e.target.value == this.userChecklists[0].lists[i].id) {
         this.userChecklists[0].lists[i].checked = e.target.checked;
 
-        this.targetID = new Array(50).fill(this.userChecklists[0].lists[i].tags[0].title);
+        this.targetID = new Array(50).fill(
+          this.userChecklists[0].lists[i].tags[0].title
+        );
 
         if (e.target.checked == true) {
-          if (this.targetID[0] == 'Pre-Onboarding') {
+          if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow++;
             this.checkPre = this.checkPreDb + this.checkPreNow;
           }
 
           if (this.userChecklists[0].lists[i].tags.length == 2) {
-            this.targetID1 = new Array(50).fill(this.userChecklists[0].lists[i].tags[1].title);
+            this.targetID1 = new Array(50).fill(
+              this.userChecklists[0].lists[i].tags[1].title
+            );
           }
         } else if (e.target.checked == false) {
-          if (this.targetID[0] == 'Pre-Onboarding') {
+          if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow--;
             this.checkPre = this.checkPreDb + this.checkPreNow;
           }
 
           if (this.userChecklists[0].lists[i].tags.length == 2) {
-            this.targetID1 = new Array(50).fill(this.userChecklists[0].lists[i].tags[1].title);
+            this.targetID1 = new Array(50).fill(
+              this.userChecklists[0].lists[i].tags[1].title
+            );
           }
         }
 
@@ -206,5 +299,3 @@ onCheckboxChange(e) {
   //   this.modalService.open(shopModal, { windowClass: 'shopModal' });
   // }
 }
-
-

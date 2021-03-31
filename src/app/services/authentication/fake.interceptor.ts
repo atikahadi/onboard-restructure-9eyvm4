@@ -5,7 +5,7 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HTTP_INTERCEPTORS
+  HTTP_INTERCEPTORS,
 } from "@angular/common/http";
 import { Observable, of, throwError } from "rxjs";
 import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
@@ -19,8 +19,10 @@ const users: User[] = [
     password: "test",
     firstName: "Test",
     lastName: "User",
-    game: false
-  }
+    game: false,
+    gender: "male",
+    avatar: null,
+  },
 ];
 
 @Injectable()
@@ -55,7 +57,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function authenticate() {
       const { username, password } = body;
       const user = users.find(
-        x => x.username === username && x.password === password
+        (x) => x.username === username && x.password === password
       );
       if (!user) return error("Username or password is incorrect");
       return ok({
@@ -64,7 +66,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         firstName: user.firstName,
         lastName: user.lastName,
         token: "fake-jwt-token",
-        game: user.game
+        game: user.game,
+        avatar: user.avatar,
       });
     }
 
@@ -97,5 +100,5 @@ export let fakeBackendProvider = {
   // use fake backend in place of Http service for backend-less development
   provide: HTTP_INTERCEPTORS,
   useClass: FakeBackendInterceptor,
-  multi: true
+  multi: true,
 };

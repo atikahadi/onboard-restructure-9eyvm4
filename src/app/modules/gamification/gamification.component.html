@@ -1,9 +1,9 @@
 <div class="container-fluid p-0" *ngIf="!popup">
   <!-- Start Header -->
   <div class="banner-fluid">
-    <div class="d-flex align-items-center img-fluid w-100"
-      style="height: 400px; background: url(assets/img/header.png)">
-      <div class="pt-md-3 pr-md-3" style="position: absolute; top: 12px; right: 70px">
+    <!-- Desktop View -->
+    <div class="d-none d-md-flex align-items-center" style="height: 400px; background: url(assets/img/header.png)">
+      <div style="position: absolute; top: 30px; right: 70px">
         <span class="text-light pixel-font">
           <img src="assets/icons/coin.svg" style="width: 20px; margin-top: -7px; margin-right: -8px" />
           1122
@@ -11,11 +11,11 @@
       </div>
 
       <div class="d-flex offset-md-1">
-        <img src="assets/icons/female.svg" class="icon" style="width: 160px; height: 160px; cursor: pointer"
+        <img [src]="user.avatar" class="icon" style="width: 160px; height: 160px; cursor: pointer"
           (click)="open(avatar, 'md')" />
         <div style="margin-left: 32px">
           <p class="text-light pixel-font" style="font-size: 32px">
-            Eloise Bridgerton
+            {{ user.firstName }} {{ user.lastName }}
           </p>
           <br />
           <p class="text-light pixel-font" style="
@@ -27,7 +27,7 @@
           </p>
 
           <img src="assets/icons/power.svg" class="float-left" style="width: 20px; margin-top: -10px" />
-          <div class="level-bg w-50" style="margin-left: 24px; margin-top: -8px; margin-bottom: 20px">
+          <div class="level-bg w-100" style="margin-left: 24px; margin-top: -8px; margin-bottom: 20px">
             <div class="level w-50"></div>
           </div>
 
@@ -37,171 +37,255 @@
         </div>
       </div>
     </div>
+
+    <!-- Mobile View -->
+    <div class="d-md-none d-flex flex-column align-items-center justify-content-center"
+      style="height: 400px; background: url(assets/img/header.png)">
+      <div style="position: absolute; top: 30px; right: 70px">
+        <span class="text-light pixel-font">
+          <img src="assets/icons/coin.svg" style="width: 20px; margin-top: -7px; margin-right: -8px" />
+          1122
+        </span>
+      </div>
+      <div>
+        <img [src]="user.avatar" class="icon" style="width: 100px; height: 100px; cursor: pointer"
+          (click)="open(avatar, 'md')" />
+      </div>
+      <p class="text-light pixel-font mt-3 mb-2" style="font-size: 24px">
+        {{ user.firstName }} {{ user.lastName }}
+      </p>
+      <p class="text-light pixel-font mt-1 mb-2" style="font-size: 12px; text-transform: uppercase">
+        Level 1: Warrior
+      </p>
+      <div class="d-flex flex-row w-100 justify-content-center">
+        <div>
+          <img src="assets/icons/power.svg" style="width: 16px; margin-top: -4px" />
+        </div>
+        <div class="level-bg w-50 ml-2">
+          <div class="level w-50"></div>
+        </div>
+      </div>
+      <button class="btn-pixel-shop pixel-font mt-3" (click)="open(shopModal, 'md')">
+        Shop
+      </button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Start Progress Bar -->
+    <!-- Desktop View -->
+    <div class="d-none d-md-block my-5">
+      <div class="d-flex justify-content-center mb-4 pixel-font" style="color: #7b1b67; text-transform: uppercase">
+        My Progress
+      </div>
+
+      <div class="d-flex justify-content-end w-50" style="margin-left: -20px">
+        <img [src]="user.avatar" style="width: 40px" />
+      </div>
+
+      <div class="level-bg offset-md-1 col-md-10 w-100">
+        <div class="level w-50" style="margin-left: -20px"></div>
+      </div>
+
+      <div class="offset-md-1 col-md-10 d-flex justify-content-between" style="margin-top: -23px">
+        <div>
+          <img src="" />
+        </div>
+
+        <div>
+          <img src="assets/icons/star.svg" style="width: 24px; cursor: pointer" (click)="open(game, 'lg')" />
+        </div>
+
+        <div>
+          <img src="assets/icons/star.svg" style="width: 24px" />
+        </div>
+
+        <div>
+          <img src="assets/icons/trophy.svg" style="width: 30px; margin-right: -22px" />
+        </div>
+      </div>
+
+      <div class="col-md-11 d-flex justify-content-between ml-md-5 mt-md-3 pixel-font-light font-weight-bold"
+        style="font-size: 16px">
+        <span>Pre-Onboarding</span>
+        <span>Onboarding</span>
+        <span>Post-Onboarding</span>
+        <span>Completed</span>
+      </div>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="d-md-none d-block my-5 mx-3">
+      <div class="d-flex justify-content-center mb-4 pixel-font"
+        style="color: #7b1b67; text-transform: uppercase; font-size: 14px">
+        My Progress
+      </div>
+
+      <div class="d-flex justify-content-end w-50" style="margin-left: -20px">
+        <img [src]="user.avatar" style="width: 40px" />
+      </div>
+
+      <div class="level-bg offset-md-1 col-md-10 w-100">
+        <div class="level w-50" style="margin-left: -20px"></div>
+      </div>
+
+      <div class="offset-md-1 col-md-10 d-flex justify-content-between" style="margin-top: -23px">
+        <div>
+          <img src="" />
+        </div>
+
+        <div>
+          <img src="assets/icons/star.svg" style="width: 24px; cursor: pointer" (click)="open(game, 'lg')" />
+        </div>
+
+        <div>
+          <img src="assets/icons/star.svg" style="width: 24px" />
+        </div>
+
+        <div>
+          <img src="assets/icons/trophy.svg" style="width: 30px; margin-right: -22px" />
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-2 pixel-font-light font-weight-bold"
+        style="font-size: 12px; text-align: center">
+        <span>Pre-<br />Onboarding</span>
+        <span>Onboarding</span>
+        <span>Post-<br />Onboarding</span>
+        <span>Completed</span>
+      </div>
+    </div>
+    <!-- End Progress Bar -->
   </div>
-  <!-- End Header -->
 
-  <!-- Start Progress Bar -->
-  <div class="my-5">
-    <div class="d-flex justify-content-center mb-4 pixel-font" style="color: #7b1b67; text-transform: uppercase">
-      My Progress
-    </div>
-
-    <div class="d-flex justify-content-end w-50" style="margin-left: -20px">
-      <img src="assets/icons/female.svg" style="width: 40px" />
-    </div>
-
-    <div class="level-bg offset-md-1 col-md-10 w-100">
-      <div class="level w-50" style="margin-left: -20px"></div>
-    </div>
-
-    <div class="offset-md-1 col-md-10 d-flex justify-content-between" style="margin-top: -23px">
-      <div>
-        <img src="" />
-      </div>
-
-      <div>
-        <img src="assets/icons/star.svg" style="width: 24px; cursor: pointer" (click)="open(game, 'lg')" />
-      </div>
-
-      <div>
-        <img src="assets/icons/star.svg" style="width: 24px" />
-      </div>
-
-      <div>
-        <img src="assets/icons/trophy.svg" style="width: 30px; margin-right: -22px" />
-      </div>
-    </div>
-
-    <div class="col-md-11 d-flex justify-content-between ml-md-5 mt-md-3 pixel-font-light font-weight-bold"
-      style="font-size: 16px">
-      <span>Pre-Onboarding</span>
-      <span>Onboarding</span>
-      <span>Post-Onboarding</span>
-      <span>Completed</span>
-    </div>
-  </div>
-  <!-- End Progress Bar -->
-</div>
-
-<!--Start Checklist-->
-<div class="col-12" *ngIf="!popup">
-  <div class="row">
-    <div class="col-md-12 mt-4 d-flex">
-      <ng-container *ngFor="let list of userChecklists">
-        <div class="col-md-3 ml-md-3">
-          <p class="pixel-font text-uppercase" style="font-size: 12px">
-            Pre-Onboarding
-          </p>
-          <div class="line border-celcom-purple-20-black mt-n2"></div>
-          <div *ngFor="let item of list.lists | filter: filteredTag: 'tags'" class="card card-pixel my-3"
-            style="width: 18rem" id="card-checked">
-            <div *ngIf="filteredTag === 'Pre-Onboarding'" class="card-body d-flex">
-              <div class="form-check d-flex my-auto">
-                <input class="form-check-input align-self-center mr-5" type="checkbox" name="itemid" [value]="item.id"
-                  [checked]="item.checked" (change)="onCheckboxChange($event)" [disabled]="disabledPreOnboardingList" />
-                <div class="ml-3">
-                  <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                    {{ item.title }}
-                  </p>
-                  <small class="pixel-font-light mb-0" [innerHTML]="item.description"></small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <p class="pixel-font text-uppercase" style="font-size: 12px">
-            Onboarding
-          </p>
-          <div class="line border-dark mt-n2"></div>
-          <div class="card card-pixel my-3" style="width: 18rem">
-            <div class="card-body d-flex">
-              <div class="form-check d-flex my-auto">
-                <input class="form-check-input align-self-center mr-5" type="checkbox" value="" id="flexCheckDefault" />
-                <div class="ml-3">
-                  <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                    Uploading the necessary documents into Celcom Career Portal
-                  </p>
-                  <p class="mb-0 pixel-font-light">
-                    <small>Log in to the portal to upload the documents</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card card-pixel my-3" style="width: 18rem">
-            <div class="card-body d-flex">
-              <div class="form-check d-flex my-auto">
-                <input class="form-check-input align-self-center mr-5" type="checkbox" value="" id="flexCheckDefault" />
-                <div class="ml-3">
-                  <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                    Uploading the necessary documents into Celcom Career Portal
-                  </p>
-                  <p class="mb-0 pixel-font-light">
-                    <small>Log in to the portal to upload the documents</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <p class="pixel-font text-uppercase" style="font-size: 12px">
-            Post-Onboarding
-          </p>
-          <div class="line border-primary mt-n2"></div>
-          <div class="card card-pixel my-3" style="width: 18rem">
-            <div class="card-body d-flex">
-              <div class="form-check d-flex my-auto">
-                <input class="form-check-input align-self-center mr-5" type="checkbox" value="" id="flexCheckDefault" />
-                <div class="ml-3">
-                  <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                    Uploading the necessary documents into Celcom Career Portal
-                  </p>
-                  <p class="mb-0 pixel-font-light">
-                    <small>Log in to the portal to upload the documents</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card card-pixel my-3" style="width: 18rem">
-            <div class="card-body d-flex">
-              <div class="form-check d-flex my-auto">
-                <input class="form-check-input align-self-center mr-5" type="checkbox" value="" id="flexCheckDefault" />
-                <div class="ml-3">
-                  <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                    Uploading the necessary documents into Celcom Career Portal
-                  </p>
-                  <p class="mb-0 pixel-font-light">
-                    <small>Log in to the portal to upload the documents</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <p class="pixel-font text-uppercase" style="font-size: 12px">To-Do</p>
-          <div class="line border-warning mt-n2"></div>
-          <div class="card card-pixel my-3" style="width: 18rem">
-            <div class="card-body d-flex">
-              <div class="mx-auto d-flex my-4">
-                <a class="d-flex btn flex-column" href="#">
-                  <img class="mx-auto" src="../../../assets/icons/new-task.svg" style="width: 30px" alt="" />
-                  <div class="text-center">
-                    <p class="mb-0 pixel-font-light mt-3">Add new task</p>
+  <!--Start Checklist-->
+  <div class="col-12" *ngIf="!popup">
+    <div class="row">
+      <div class="col-md-12 mt-4 d-flex">
+        <ng-container *ngFor="let list of userChecklists">
+          <div class="col-md-3 ml-md-3">
+            <p class="pixel-font text-uppercase" style="font-size: 12px">
+              Pre-Onboarding
+            </p>
+            <div class="line border-celcom-purple-20-black mt-n2"></div>
+            <div *ngFor="let item of list.lists | filter: filteredTag: 'tags'" class="card card-pixel my-3"
+              style="width: 18rem" id="card-checked">
+              <div *ngIf="filteredTag === 'Pre-Onboarding'" class="card-body d-flex">
+                <div class="form-check d-flex my-auto">
+                  <input class="form-check-input align-self-center mr-5" type="checkbox" name="itemid" [value]="item.id"
+                    [checked]="item.checked" (change)="onCheckboxChange($event)"
+                    [disabled]="disabledPreOnboardingList" />
+                  <div class="ml-3">
+                    <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                      {{ item.title }}
+                    </p>
+                    <small class="pixel-font-light mb-0" [innerHTML]="item.description"></small>
                   </div>
-                </a>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </ng-container>
+            <div class="col-md-3">
+              <p class="pixel-font text-uppercase" style="font-size: 12px">
+                Onboarding
+              </p>
+              <div class="line border-dark mt-n2"></div>
+              <div class="card card-pixel my-3" style="width: 18rem">
+                <div class="card-body d-flex">
+                  <div class="form-check d-flex my-auto">
+                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                      id="flexCheckDefault" />
+                    <div class="ml-3">
+                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                        Uploading the necessary documents into Celcom Career
+                        Portal
+                      </p>
+                      <p class="mb-0 pixel-font-light">
+                        <small>Log in to the portal to upload the documents</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card card-pixel my-3" style="width: 18rem">
+                <div class="card-body d-flex">
+                  <div class="form-check d-flex my-auto">
+                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                      id="flexCheckDefault" />
+                    <div class="ml-3">
+                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                        Uploading the necessary documents into Celcom Career
+                        Portal
+                      </p>
+                      <p class="mb-0 pixel-font-light">
+                        <small>Log in to the portal to upload the documents</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <p class="pixel-font text-uppercase" style="font-size: 12px">
+                Post-Onboarding
+              </p>
+              <div class="line border-primary mt-n2"></div>
+              <div class="card card-pixel my-3" style="width: 18rem">
+                <div class="card-body d-flex">
+                  <div class="form-check d-flex my-auto">
+                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                      id="flexCheckDefault" />
+                    <div class="ml-3">
+                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                        Uploading the necessary documents into Celcom Career
+                        Portal
+                      </p>
+                      <p class="mb-0 pixel-font-light">
+                        <small>Log in to the portal to upload the documents</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card card-pixel my-3" style="width: 18rem">
+                <div class="card-body d-flex">
+                  <div class="form-check d-flex my-auto">
+                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                      id="flexCheckDefault" />
+                    <div class="ml-3">
+                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                        Uploading the necessary documents into Celcom Career
+                        Portal
+                      </p>
+                      <p class="mb-0 pixel-font-light">
+                        <small>Log in to the portal to upload the documents</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <p class="pixel-font text-uppercase" style="font-size: 12px">
+                To-Do
+              </p>
+              <div class="line border-warning mt-n2"></div>
+              <div class="card card-pixel my-3" style="width: 18rem">
+                <div class="card-body d-flex">
+                  <div class="mx-auto d-flex my-4">
+                    <a class="d-flex btn flex-column" href="#">
+                      <img class="mx-auto" src="../../../assets/icons/new-task.svg" style="width: 30px" alt="" />
+                      <div class="text-center">
+                        <p class="mb-0 pixel-font-light mt-3">Add new task</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>
-
 <!-- Start Shop Modal -->
 <ng-template #shopModal let-modal>
   <div class="modal-header d-flex justify-content-end px-4">
@@ -280,10 +364,14 @@
         Choose your gender
       </p>
       <div class="d-flex justify-content-center">
-        <button type="button" class="pixel-font btn-pixel mr-2" (click)="modal.close('Ok click'); open(avatar, 'md')">
+        <button type="button" class="pixel-font btn-pixel mr-2" (click)="
+            modal.close('Ok click'); setGender('male'); open(avatar, 'md')
+          ">
           MALE
         </button>
-        <button type="button" class="pixel-font btn-pixel ml-2" (click)="modal.close('Ok click'); open(avatar, 'md')">
+        <button type="button" class="pixel-font btn-pixel ml-2" (click)="
+            modal.close('Ok click'); setGender('female'); open(avatar, 'md')
+          ">
           FEMALE
         </button>
       </div>
@@ -319,17 +407,17 @@
             <p class="pixel-font-light">Clothes</p>
           </div>
           <div class="col d-flex flex-column align-items-center my-auto">
-            <img type="button" src="assets/icons/arrow.svg" style="width: 24px" /><br />
-            <img type="button" src="assets/icons/arrow.svg" style="width: 24px" /><br />
-            <img type="button" src="assets/icons/arrow.svg" style="width: 24px" />
+            <img type="button" src="assets/icons/arrow.svg" style="width: 24px" (click)="changeHair(i - 1)" /><br />
+            <img type="button" src="assets/icons/arrow.svg" style="width: 24px" (click)="changeFace(j - 1)" /><br />
+            <img type="button" src="assets/icons/arrow.svg" style="width: 24px" (click)="changeClothes(k - 1)" />
           </div>
           <div class="col d-flex flex-column align-items-center my-auto">
-            <img src="assets/icons/female.svg" style="width: 100px" />
+            <img [src]="user.avatar" style="width: 100px" />
           </div>
           <div class="col d-flex flex-column align-items-center my-auto">
-            <img type="button" src="assets/icons/arrow2.svg" style="width: 24px" /><br />
-            <img type="button" src="assets/icons/arrow2.svg" style="width: 24px" /><br />
-            <img type="button" src="assets/icons/arrow2.svg" style="width: 24px" />
+            <img type="button" src="assets/icons/arrow2.svg" style="width: 24px" (click)="changeHair(i + 1)" /><br />
+            <img type="button" src="assets/icons/arrow2.svg" style="width: 24px" (click)="changeFace(j + 1)" /><br />
+            <img type="button" src="assets/icons/arrow2.svg" style="width: 24px" (click)="changeClothes(k + 1)" />
           </div>
         </div>
         <div class="row justify-content-center">

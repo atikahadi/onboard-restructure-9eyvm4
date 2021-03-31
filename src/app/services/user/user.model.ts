@@ -6,4 +6,6 @@ export class User {
   lastName: string;
   token?: string;
   game: boolean;
+  gender: string;
+  avatar: string;
 }
