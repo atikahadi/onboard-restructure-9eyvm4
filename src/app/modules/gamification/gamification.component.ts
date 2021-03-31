@@ -8,6 +8,8 @@ import { ChecklistService } from "../checklist/checklist.service";
 import { first } from "rxjs/operators";
 import { User } from "../../services/user/user.model";
 import { UserService } from "../../services/user/user.service";
+import mergeImages from "merge-images";
+import { saveAs } from "file-saver";
 
 @Component({
   selector: "app-gamification",
@@ -25,7 +27,10 @@ export class GamificationComponent implements OnInit {
   playerSelected = -1;
   isResultShow = false;
   isLoading = false;
-  users: User[];
+  public user;
+  femalePath: string;
+  // malePath = "assets/avatar/male/";
+  avatarSrc;
 
   //Checklist
   public userChecklists;
@@ -41,6 +46,9 @@ export class GamificationComponent implements OnInit {
   list: any;
   current: number;
   mobile: boolean = false;
+  i = 1;
+  j = 1;
+  k = 1;
 
   theResult = 0;
   enemySelected = -1;
@@ -58,14 +66,17 @@ export class GamificationComponent implements OnInit {
     } else {
       this.popup = false;
     }
+    this.femalePath =
+      "assets/avatar/" +
+      this.authenticationService.currentUserValue.gender +
+      "/";
 
-    this.userService
-      .getAll()
-      .pipe(first())
-      .subscribe((users) => {
-        this.loading = false;
-        this.users = users;
-      });
+    // this.userService
+    //   .getAll()
+    //   .pipe(first())
+    //   .subscribe((users) => {
+    this.user = this.authenticationService.currentUserValue;
+    // });
 
     //Checklist
     this.checklist.getUserChecklist().subscribe((data) => {
@@ -95,6 +106,65 @@ export class GamificationComponent implements OnInit {
         this.userChecklists[0].completed = true;
       }
       this.checkPre = this.checkPreDb;
+    });
+  }
+
+  setGender(item) {
+    this.authenticationService.currentUserValue.gender = item;
+    var json = JSON.parse(localStorage.getItem("currentUser"));
+    json.gender = item;
+    localStorage.setItem("currentUser", JSON.stringify(json));
+    this.femalePath =
+      "assets/avatar/" +
+      this.authenticationService.currentUserValue.gender +
+      "/";
+    this.createAvatar();
+  }
+
+  changeHair(index) {
+    if (index == 0) {
+      this.i = 33;
+    } else if (index == 34) {
+      this.i = 1;
+    } else {
+      this.i = index;
+    }
+    this.createAvatar();
+  }
+
+  changeFace(index) {
+    if (index == 0) {
+      this.j = 4;
+    } else if (index == 5) {
+      this.j = 1;
+    } else {
+      this.j = index;
+    }
+    this.createAvatar();
+  }
+
+  changeClothes(index) {
+    if (index == 0) {
+      this.k = 59;
+    } else if (index == 60) {
+      this.k = 1;
+    } else {
+      this.k = index;
+    }
+    this.createAvatar();
+  }
+
+  createAvatar() {
+    mergeImages([
+      this.femalePath + "face" + this.j + ".png",
+      this.femalePath + "head" + this.i + ".png",
+      this.femalePath + "clothes" + this.k + ".png",
+    ]).then((b64) => {
+      this.avatarSrc = b64;
+      var json = JSON.parse(localStorage.getItem("currentUser"));
+      json.avatar = this.avatarSrc;
+      localStorage.setItem("currentUser", JSON.stringify(json));
+      this.authenticationService.currentUserValue.avatar = this.avatarSrc;
     });
   }
 

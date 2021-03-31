@@ -1,10 +1,12 @@
 [
   {
-    "id":1,
-    "username":"test",
-    "password":"test",
-    "firstName":"Test",
-    "lastName":"User",
-    "game": false
+    "id": 1,
+    "username": "test",
+    "password": "test",
+    "firstName": "Test",
+    "lastName": "User",
+    "game": false,
+    "gender": "male",
+    "avatar": null
   }
 ]
