@@ -117,7 +117,11 @@ onCheckboxChange(e) {
           }
         );
       }
-    }
+    } 
+  }
+
+  completePreOnboardingList() {
+    this.disabledPreOnboardingList = true;
   }
 
   open(content, dialogSize) {
