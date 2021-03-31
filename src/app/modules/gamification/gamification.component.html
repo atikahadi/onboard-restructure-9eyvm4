@@ -84,15 +84,15 @@
         />
       </div>
       <p
-        class="text-light pixel-font pt-3"
+        class="text-light pixel-font mt-3"
         style="font-size: 24px"
         *ngFor="let user of users"
       >
         {{ user.firstName }} {{ user.lastName }}
       </p>
       <p
-        class="text-light pixel-font pt-3"
-        style="font-size: 12px; margin-top: -15px; text-transform: uppercase"
+        class="text-light pixel-font mt-1 mb-2"
+        style="font-size: 12px; text-transform: uppercase"
       >
         Level 1: Warrior
       </p>
@@ -103,18 +103,22 @@
             style="width: 16px; margin-top: -4px"
           />
         </div>
-        <div class="level-bg w-50 ml-2 mb-4">
+        <div class="level-bg w-50 ml-2">
           <div class="level w-50"></div>
         </div>
       </div>
-      <button class="btn-pixel-shop pixel-font" (click)="open(shopModal, 'md')">
+      <button
+        class="btn-pixel-shop pixel-font mt-3"
+        (click)="open(shopModal, 'md')"
+      >
         Shop
       </button>
     </div>
     <!-- End Header -->
 
     <!-- Start Progress Bar -->
-    <div class="my-5">
+    <!-- Desktop View -->
+    <div class="d-none d-md-block my-5">
       <div
         class="d-flex justify-content-center mb-4 pixel-font"
         style="color: #7b1b67; text-transform: uppercase"
@@ -165,6 +169,62 @@
         <span>Pre-Onboarding</span>
         <span>Onboarding</span>
         <span>Post-Onboarding</span>
+        <span>Completed</span>
+      </div>
+    </div>
+
+    <!-- Mobile View -->
+    <div class="d-md-none d-block my-5 mx-3">
+      <div
+        class="d-flex justify-content-center mb-4 pixel-font"
+        style="color: #7b1b67; text-transform: uppercase; font-size: 14px"
+      >
+        My Progress
+      </div>
+
+      <div class="d-flex justify-content-end w-50" style="margin-left: -20px">
+        <img src="assets/icons/female.svg" style="width: 40px" />
+      </div>
+
+      <div class="level-bg offset-md-1 col-md-10 w-100">
+        <div class="level w-50" style="margin-left: -20px"></div>
+      </div>
+
+      <div
+        class="offset-md-1 col-md-10 d-flex justify-content-between"
+        style="margin-top: -23px"
+      >
+        <div>
+          <img src="" />
+        </div>
+
+        <div>
+          <img
+            src="assets/icons/star.svg"
+            style="width: 24px; cursor: pointer"
+            (click)="open(game, 'lg')"
+          />
+        </div>
+
+        <div>
+          <img src="assets/icons/star.svg" style="width: 24px" />
+        </div>
+
+        <div>
+          <img
+            src="assets/icons/trophy.svg"
+            style="width: 30px; margin-right: -22px"
+          />
+        </div>
+      </div>
+
+      <div
+        class="d-flex justify-content-between mt-2 pixel-font-light font-weight-bold"
+        style="font-size: 12px; text-align: center"
+      >
+        <span>Pre-<br />Onboarding</span>
+        <span>Onboarding</span>
+        <span>Post-<br />Onboarding</span>
         <span>Completed</span>
       </div>
     </div>
