@@ -23,32 +23,23 @@
           style="width: 160px; height: 160px; cursor: pointer"
           (click)="open(avatar, 'md')"
         />
-        <div style="margin-left: 32px">
-          <p class="text-light pixel-font" style="font-size: 32px">
+        <div class="ml-md-4">
+          <p class="text-light pixel-font mb-md-0" style="font-size: 32px">
             {{ user.firstName }} {{ user.lastName }}
           </p>
           <br />
           <p
-            class="text-light pixel-font"
-            style="
-              font-size: 14px;
-              margin-top: -15px;
-              text-transform: uppercase;
-            "
+            class="text-light pixel-font mt-md-0 mb-md-0"
+            style="font-size: 14px; text-transform: uppercase"
           >
             Level 1: Warrior
           </p>
 
-          <img
-            src="assets/icons/power.svg"
-            class="float-left"
-            style="width: 20px; margin-top: -10px"
-          />
-          <div
-            class="level-bg w-100"
-            style="margin-left: 24px; margin-top: -8px; margin-bottom: 20px"
-          >
-            <div class="level w-50"></div>
+          <div class="d-md-flex flex-row w-100 mt-md-2 mb-md-3">
+            <img src="assets/icons/power.svg" style="width: 18px" />
+            <div class="level-bar w-100 ml-3">
+              <div class="w-50"></div>
+            </div>
           </div>
 
           <button
@@ -87,20 +78,15 @@
         {{ user.firstName }} {{ user.lastName }}
       </p>
       <p
-        class="text-light pixel-font mt-1 mb-2"
+        class="text-light pixel-font mt-2 mb-2"
         style="font-size: 12px; text-transform: uppercase"
       >
         Level 1: Warrior
       </p>
       <div class="d-flex flex-row w-100 justify-content-center">
-        <div>
-          <img
-            src="assets/icons/power.svg"
-            style="width: 16px; margin-top: -4px"
-          />
-        </div>
-        <div class="level-bg w-50 ml-2">
-          <div class="level w-50"></div>
+        <img src="assets/icons/power.svg" style="width: 18px" />
+        <div class="level-bar w-50 ml-3">
+          <div class="w-50"></div>
         </div>
       </div>
       <button
@@ -122,17 +108,19 @@
         My Progress
       </div>
 
-      <div class="d-flex justify-content-end w-50" style="margin-left: -20px">
+      <div class="d-flex justify-content-end w-50">
         <img [src]="user.avatar" style="width: 40px" />
       </div>
 
-      <div class="level-bg offset-md-1 col-md-10 w-100">
-        <div class="level w-50" style="margin-left: -20px"></div>
+      <div class="offset-md-1 col-md-10">
+        <div class="progress-bar">
+          <div class="w-50"></div>
+        </div>
       </div>
 
       <div
         class="offset-md-1 col-md-10 d-flex justify-content-between"
-        style="margin-top: -23px"
+        style="margin-top: -22px"
       >
         <div>
           <img src="" />
@@ -159,7 +147,7 @@
       </div>
 
       <div
-        class="col-md-11 d-flex justify-content-between ml-md-5 mt-md-3 pixel-font-light font-weight-bold"
+        class="col-md-11 mx-md-5 mt-md-2 d-flex justify-content-between pixel-font-light font-weight-bold"
         style="font-size: 16px"
       >
         <span>Pre-Onboarding</span>
@@ -178,17 +166,17 @@
         My Progress
       </div>
 
-      <div class="d-flex justify-content-end w-50" style="margin-left: -20px">
+      <div class="d-flex justify-content-end w-50">
         <img [src]="user.avatar" style="width: 40px" />
       </div>
 
-      <div class="level-bg offset-md-1 col-md-10 w-100">
-        <div class="level w-50" style="margin-left: -20px"></div>
+      <div class="progress-bar w-100">
+        <div class="w-50"></div>
       </div>
 
       <div
         class="offset-md-1 col-md-10 d-flex justify-content-between"
-        style="margin-top: -23px"
+        style="margin-top: -22px"
       >
         <div>
           <img src="" />
@@ -238,6 +226,7 @@
             </p>
             <div class="line border-celcom-purple-20-black mt-n2"></div>
             <div
+              [ngClass]="{ 'bg-active': item.checked == true }"
               *ngFor="let item of list.lists | filter: filteredTag:'tags'"
               class="card card-pixel my-3"
               style="width: 18rem"
@@ -259,7 +248,6 @@
                   <div class="ml-3">
                     <p
                       class="form-check-label font-weight-bold pixel-font-light"
-                      for="flexCheckDefault"
                     >
                       {{ item.title }}
                     </p>
@@ -455,7 +443,11 @@
         </div>
         <div
           class="d-flex justify-content-center align-items-end p-2 pixel-font-light font-weight-bold"
-          style="background: rgba(253, 199, 93, 0.5); font-size: 14px"
+          style="
+            background: rgba(253, 199, 93, 0.5);
+            font-size: 14px;
+            border-top: 2px solid #000;
+          "
         >
           <img
             src="assets/icons/coin.svg"
@@ -472,7 +464,11 @@
         </div>
         <div
           class="d-flex justify-content-center align-items-end p-2 pixel-font-light font-weight-bold"
-          style="background: rgba(253, 199, 93, 0.5); font-size: 14px"
+          style="
+            background: rgba(253, 199, 93, 0.5);
+            font-size: 14px;
+            border-top: 2px solid #000;
+          "
         >
           <img
             src="assets/icons/coin.svg"
@@ -489,7 +485,11 @@
         </div>
         <div
           class="d-flex justify-content-center align-items-end p-2 pixel-font-light font-weight-bold"
-          style="background: rgba(253, 199, 93, 0.5); font-size: 14px"
+          style="
+            background: rgba(253, 199, 93, 0.5);
+            font-size: 14px;
+            border-top: 2px solid #000;
+          "
         >
           <img
             src="assets/icons/coin.svg"
