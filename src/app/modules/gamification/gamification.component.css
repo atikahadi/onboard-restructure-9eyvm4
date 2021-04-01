@@ -115,7 +115,6 @@ button:active {
 
 .line {
   border-top: 3px solid;
-  width: 288px;
 }
 
 .border-celcom-purple-20-black {
@@ -132,15 +131,11 @@ button:active {
   border: 3px solid #000000 !important;
 }
 
-/* .shopModal .modal-dialog{
-  max-width: 1000px;
-} */
+.bg-checked {
+  background: #ddd;
+}
 
 ::ng-deep .modal-dialog.modal-dialog-centered {
   max-width: 100%;
   width: 100% !important;
-}
-
-.bg-active {
-  background: #ddd;
 }
