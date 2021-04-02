@@ -131,6 +131,22 @@ button:active {
   border: 3px solid #000000 !important;
 }
 
+small > p {
+  margin-bottom: 0;
+}
+
+/* .form-check input[type="checkbox"]:checked ~ .card-body  {
+  background-color: #009bdf;
+}  */
+
+.bg-active {
+  background-color: #f3f3f3;
+}
+
+
+/* .shopModal .modal-dialog{
+  max-width: 1000px;
+} */
 .bg-checked {
   background: #ddd;
 }
