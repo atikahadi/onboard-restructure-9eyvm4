@@ -41,7 +41,7 @@ export class GamificationComponent implements OnInit {
   public checkPreNow = 0;
   public targetID: Array<string>;
   public targetID1: Array<string>;
-  disabledPreOnboardingList: boolean = true;
+  disabledPreOnboardingList: boolean = false;
   disabledCompleteButton: boolean = true;
   list: any;
   current: number;
