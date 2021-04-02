@@ -115,7 +115,6 @@ button:active {
 
 .line {
   border-top: 3px solid;
-  width: 288px;
 }
 
 .border-celcom-purple-20-black {
@@ -132,15 +131,27 @@ button:active {
   border: 3px solid #000000 !important;
 }
 
+small > p {
+  margin-bottom: 0;
+}
+
+/* .form-check input[type="checkbox"]:checked ~ .card-body  {
+  background-color: #009bdf;
+}  */
+
+.bg-active {
+  background-color: #f3f3f3;
+}
+
+
 /* .shopModal .modal-dialog{
   max-width: 1000px;
 } */
+.bg-checked {
+  background: #ddd;
+}
 
 ::ng-deep .modal-dialog.modal-dialog-centered {
   max-width: 100%;
   width: 100% !important;
-}
-
-.bg-active {
-  background: #ddd;
 }
