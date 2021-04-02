@@ -182,10 +182,11 @@
                 <input class="form-check-input align-self-center mr-5" type="checkbox" name="itemid" [value]="item.id"
                   [checked]="item.checked" (change)="onCheckboxChange($event)" [disabled]="disabledPreOnboardingList" />
                 <div class="ml-3">
-                  <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                  <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault"
+                    style="font-size: 16px;">
                     {{ item.title }}
                   </p>
-                  <small class="pixel-font-light mb-0" [innerHTML]="item.description"></small>
+                  <small class="pixel-font-light mb-0" style="font-size: 12px;" [innerHTML]="item.description"></small>
                 </div>
               </div>
             </div>
