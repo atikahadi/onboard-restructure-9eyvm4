@@ -27,8 +27,10 @@ import { ErrorInterceptor } from "./services/authentication/error.interceptor";
 
 import { AuthenticationService } from "./services/authentication/authentication.service";
 import { UserService } from "./services/user/user.service";
-import { GamificationComponent } from './modules/gamification/gamification.component';
-import { FilterPipe } from './utilities/filter/filter.pipe';
+import { GamificationComponent } from "./modules/gamification/gamification.component";
+import { FilterPipe } from "./utilities/filter/filter.pipe";
+import { OsomComponent } from "./modules/osom/osom.component";
+import { TetrisComponent } from "./modules/tetris/tetris.component";
 
 @NgModule({
   imports: [
@@ -40,12 +42,12 @@ import { FilterPipe } from './utilities/filter/filter.pipe';
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false
+      dataEncapsulation: false,
     }),
     AppRoutingModule,
     NgbModule,
     KonamiModule,
-    LottieModule
+    LottieModule,
   ],
   declarations: [
     AppComponent,
@@ -59,7 +61,9 @@ import { FilterPipe } from './utilities/filter/filter.pipe';
     DashboardComponent,
     ChecklistComponent,
     GamificationComponent,
-    FilterPipe
+    FilterPipe,
+    OsomComponent,
+    TetrisComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -69,8 +73,8 @@ import { FilterPipe } from './utilities/filter/filter.pipe';
     fakeBackendProvider,
 
     AuthenticationService,
-    UserService
+    UserService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,22 +13,59 @@
   border: 5px solid #8368a1;
 }
 
-.level-bg {
-  background: #000000;
-  height: 18px;
-  border-radius: 20px;
+.level-bar {
+  background: #fff;
+  height: 20px;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+}
+.level-bar:before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 103%;
+  height: 15px;
+  border-left: 4px solid #000;
+  border-right: 4px solid #000;
+  margin-bottom: 1px;
+  margin-left: -4px;
 }
 
-.level {
+.level-bar > div {
+  position: relative;
   background: #009bdf;
-  height: 18px;
-  border-radius: 20px;
-  border: 2px solid #000000;
+  height: 14px;
+  border: 3px solid #fff;
+  margin-top: -19px;
+}
+
+.progress-bar {
+  background: #fff;
+  height: 20px;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+}
+.progress-bar:before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 99%;
+  height: 15px;
+  border-left: 4px solid #000;
+  border-right: 4px solid #000;
+  margin-bottom: 1px;
+  margin-left: -4px;
+}
+
+.progress-bar > div {
+  background: #009bdf;
+  height: 14px;
+  border: 3px solid #fff;
 }
 
 .look {
-  border: 1px solid #ccc;
-  box-shadow: 0px 3px 6px #ccc;
+  border: 2px solid #000;
+  box-shadow: 4px 4px #000;
 }
 
 button {
@@ -78,7 +115,6 @@ button:active {
 
 .line {
   border-top: 3px solid;
-  width: 288px;
 }
 
 .border-celcom-purple-20-black {
@@ -111,6 +147,9 @@ small > p {
 /* .shopModal .modal-dialog{
   max-width: 1000px;
 } */
+.bg-checked {
+  background: #ddd;
+}
 
 ::ng-deep .modal-dialog.modal-dialog-centered {
   max-width: 100%;
