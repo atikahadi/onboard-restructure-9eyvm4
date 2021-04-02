@@ -1,6 +1,6 @@
-export const COLS = 10;
-export const ROWS = 20;
-export const BLOCK_SIZE = 30;
+export const COLS = 15;
+export const ROWS = 25;
+export const BLOCK_SIZE = 20;
 export const LINES_PER_LEVEL = 10;
 export const COLORS = [
   "none",

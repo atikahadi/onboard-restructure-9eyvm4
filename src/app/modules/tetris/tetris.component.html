@@ -1,15 +1,27 @@
+<h1 class="pixel-font text-center">TETRIS</h1>
 <div class="row">
-  <div class="grid">
-    <canvas #board class="game-board"></canvas>
-    <div class="right-column">
+  <div class="col-3">
+    <div>
       <div>
-        <h1>TETRIS</h1>
-        <p>Score: {{ points }}</p>
-        <p>Lines: {{ lines }}</p>
-        <p>Level: {{ level }}</p>
-        <canvas #next class="next"></canvas>
+        <p class="pixel-font-light">Score: {{ points }}</p>
+        <p class="pixel-font-light">Lines: {{ lines }}</p>
+        <p class="pixel-font-light">Level: {{ level }}</p>
       </div>
-      <button (click)="play()" class="play-button">Play</button>
     </div>
+  </div>
+  <div class="col-6 d-flex justify-content-center">
+    <canvas #board class="game-board"></canvas>
+    <button
+      (click)="play()"
+      class="pixel-font btn-pixel"
+      [ngClass]="{ 'd-none': onPlay == true }"
+      style="position: absolute; top: 40%"
+    >
+      Play
+    </button>
+  </div>
+  <div class="col-3">
+    <p class="pixel-font-light">Next</p>
+    <canvas #next class="next"></canvas>
   </div>
 </div>

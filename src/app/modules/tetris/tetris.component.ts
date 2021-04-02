@@ -33,6 +33,7 @@ export class TetrisComponent implements OnInit {
   board: number[][];
   piece: Piece;
   next: Piece;
+  onPlay = false;
   requestId: number;
   time: { start: number; elapsed: number; level: number };
   points: number;
@@ -100,6 +101,7 @@ export class TetrisComponent implements OnInit {
   }
 
   play() {
+    this.onPlay = true;
     this.resetGame();
     this.next = new Piece(this.ctx);
     this.piece = new Piece(this.ctx);
