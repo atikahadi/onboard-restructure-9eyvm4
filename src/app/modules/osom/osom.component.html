@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-6 mb-4">
-    <div class="card shadow rounded" style="height: 295px">
+    <div class="modal-content card shadow" style="height: 295px">
       <div class="card-body">
         <h2 class="pixel-font">You</h2>
-        <p class="display-4 text-right">{{ scores[0] }}</p>
+        <p class="pixel-font display-4 text-right">{{ scores[0] }}</p>
 
-        <h3>Choose your weapon:</h3>
+        <h4 class="pixel-font-light font-weight-bold">Choose your weapon:</h4>
         <div class="d-flex justify-content-around">
           <button
             (click)="pick(0)"
@@ -79,10 +79,10 @@
   </div>
 
   <div class="col-md-6 mb-4">
-    <div class="card shadow rounded" style="height: 295px">
+    <div class="modal-content card shadow" style="height: 295px">
       <div class="card-body">
         <h2 class="pixel-font">Computer</h2>
-        <div class="display-4 text-right">{{ scores[1] }}</div>
+        <div class="pixel-font display-4 text-right">{{ scores[1] }}</div>
 
         <div class="d-flex justify-content-center w-100" *ngIf="thinking">
           <app-loader></app-loader>
@@ -153,21 +153,23 @@
   </div>
 </div>
 
-<div *ngIf="!thinking && isResultShow" class="d-flex flex-column">
-  <div [ngSwitch]="theResult" class="text-center">
+<div *ngIf="!thinking && isResultShow" class="d-flex flex-column my-4">
+  <div [ngSwitch]="theResult" class="pixel-font text-center">
     <ng-template [ngSwitchCase]="0">
-      <h1>You're the winner!</h1>
+      <h3>You're the winner!</h3>
     </ng-template>
     <ng-template [ngSwitchCase]="1">
-      <h1>You lose.</h1>
+      <h3>You lose.</h3>
     </ng-template>
     <ng-template [ngSwitchCase]="2">
-      <h1>It's a tie!</h1>
+      <h3>It's a tie!</h3>
     </ng-template>
     <ng-template ngSwitchDefault> </ng-template>
   </div>
-  <p class="text-center">Pick again to continue or</p>
-  <button (click)="reset()" class="btn btn-outline-secondary mx-auto mb-5">
+  <h5 class="text-center pixel-font-light font-weight-bold">
+    Pick again to continue or
+  </h5>
+  <button (click)="reset()" class="btn-pixel-primary pixel-font mx-auto mb-2">
     Reset score
   </button>
 </div>
