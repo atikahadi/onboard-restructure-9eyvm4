@@ -167,120 +167,123 @@
               Pre-Onboarding
             </p>
             <div class="line border-celcom-purple-20-black mt-n2"></div>
-            <div *ngFor="let item of list.lists | filter: filteredTag: 'tags'" class="card card-pixel my-3"
-              style="width: 18rem" id="card-checked">
+            <div *ngFor="let item of list.lists | filter: filteredTag: 'tags'"
+              [ngClass]="{'bg-active': item.checked == true}" class="card card-pixel my-3" style="width: 18rem"
+              id="card-checked">
               <div *ngIf="filteredTag === 'Pre-Onboarding'" class="card-body d-flex">
                 <div class="form-check d-flex my-auto">
                   <input class="form-check-input align-self-center mr-5" type="checkbox" name="itemid" [value]="item.id"
                     [checked]="item.checked" (change)="onCheckboxChange($event)"
                     [disabled]="disabledPreOnboardingList" />
                   <div class="ml-3">
-                    <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                    <p style="font-size: 16px;" class="form-check-label font-weight-bold pixel-font-light"
+                      for="flexCheckDefault">
                       {{ item.title }}
                     </p>
-                    <small class="pixel-font-light mb-0" [innerHTML]="item.description"></small>
+                    <small style="font-size: 75%;" class="pixel-font-light" [innerHTML]="item.description"></small>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <p class="pixel-font text-uppercase" style="font-size: 12px">
-                Onboarding
-              </p>
-              <div class="line border-dark mt-n2"></div>
-              <div class="card card-pixel my-3" style="width: 18rem">
-                <div class="card-body d-flex">
-                  <div class="form-check d-flex my-auto">
-                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
-                      id="flexCheckDefault" />
-                    <div class="ml-3">
-                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                        Uploading the necessary documents into Celcom Career
-                        Portal
-                      </p>
-                      <p class="mb-0 pixel-font-light">
-                        <small>Log in to the portal to upload the documents</small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card card-pixel my-3" style="width: 18rem">
-                <div class="card-body d-flex">
-                  <div class="form-check d-flex my-auto">
-                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
-                      id="flexCheckDefault" />
-                    <div class="ml-3">
-                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                        Uploading the necessary documents into Celcom Career
-                        Portal
-                      </p>
-                      <p class="mb-0 pixel-font-light">
-                        <small>Log in to the portal to upload the documents</small>
-                      </p>
-                    </div>
+          </div>
+          <div class="col-md-3">
+            <p class="pixel-font text-uppercase" style="font-size: 12px">
+              Onboarding
+            </p>
+            <div class="line border-dark mt-n2"></div>
+            <div class="card card-pixel my-3" style="width: 18rem">
+              <div class="card-body d-flex">
+                <div class="form-check d-flex my-auto">
+                  <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                    id="flexCheckDefault" />
+                  <div class="ml-3">
+                    <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                      Uploading the necessary documents into Celcom Career
+                      Portal
+                    </p>
+                    <p class="mb-0 pixel-font-light">
+                      <small>Log in to the portal to upload the documents</small>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <p class="pixel-font text-uppercase" style="font-size: 12px">
-                Post-Onboarding
-              </p>
-              <div class="line border-primary mt-n2"></div>
-              <div class="card card-pixel my-3" style="width: 18rem">
-                <div class="card-body d-flex">
-                  <div class="form-check d-flex my-auto">
-                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
-                      id="flexCheckDefault" />
-                    <div class="ml-3">
-                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                        Uploading the necessary documents into Celcom Career
-                        Portal
-                      </p>
-                      <p class="mb-0 pixel-font-light">
-                        <small>Log in to the portal to upload the documents</small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card card-pixel my-3" style="width: 18rem">
-                <div class="card-body d-flex">
-                  <div class="form-check d-flex my-auto">
-                    <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
-                      id="flexCheckDefault" />
-                    <div class="ml-3">
-                      <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
-                        Uploading the necessary documents into Celcom Career
-                        Portal
-                      </p>
-                      <p class="mb-0 pixel-font-light">
-                        <small>Log in to the portal to upload the documents</small>
-                      </p>
-                    </div>
+            <div class="card card-pixel my-3" style="width: 18rem">
+              <div class="card-body d-flex">
+                <div class="form-check d-flex my-auto">
+                  <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                    id="flexCheckDefault" />
+                  <div class="ml-3">
+                    <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                      Uploading the necessary documents into Celcom Career
+                      Portal
+                    </p>
+                    <p class="mb-0 pixel-font-light">
+                      <small>Log in to the portal to upload the documents</small>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <p class="pixel-font text-uppercase" style="font-size: 12px">
-                To-Do
-              </p>
-              <div class="line border-warning mt-n2"></div>
-              <div class="card card-pixel my-3" style="width: 18rem">
-                <div class="card-body d-flex">
-                  <div class="mx-auto d-flex my-4">
-                    <a class="d-flex btn flex-column" href="#">
-                      <img class="mx-auto" src="../../../assets/icons/new-task.svg" style="width: 30px" alt="" />
-                      <div class="text-center">
-                        <p class="mb-0 pixel-font-light mt-3">Add new task</p>
-                      </div>
-                    </a>
+          </div>
+          <div class="col-md-3">
+            <p class="pixel-font text-uppercase" style="font-size: 12px">
+              Post-Onboarding
+            </p>
+            <div class="line border-primary mt-n2"></div>
+            <div class="card card-pixel my-3" style="width: 18rem">
+              <div class="card-body d-flex">
+                <div class="form-check d-flex my-auto">
+                  <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                    id="flexCheckDefault" />
+                  <div class="ml-3">
+                    <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                      Uploading the necessary documents into Celcom Career
+                      Portal
+                    </p>
+                    <p class="mb-0 pixel-font-light">
+                      <small>Log in to the portal to upload the documents</small>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="card card-pixel my-3" style="width: 18rem">
+              <div class="card-body d-flex">
+                <div class="form-check d-flex my-auto">
+                  <input class="form-check-input align-self-center mr-5" type="checkbox" value=""
+                    id="flexCheckDefault" />
+                  <div class="ml-3">
+                    <p class="form-check-label font-weight-bold pixel-font-light" for="flexCheckDefault">
+                      Uploading the necessary documents into Celcom Career
+                      Portal
+                    </p>
+                    <p class="mb-0 pixel-font-light">
+                      <small>Log in to the portal to upload the documents</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <p class="pixel-font text-uppercase" style="font-size: 12px">
+              To-Do
+            </p>
+            <div class="line border-warning mt-n2"></div>
+            <div class="card card-pixel my-3" style="width: 18rem">
+              <div class="card-body d-flex">
+                <div class="mx-auto d-flex my-4">
+                  <a class="d-flex btn flex-column" href="#">
+                    <img class="mx-auto" src="../../../assets/icons/new-task.svg" style="width: 30px" alt="" />
+                    <div class="text-center">
+                      <p class="mb-0 pixel-font-light mt-3">Add new task</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </ng-container>
       </div>
     </div>

@@ -36,8 +36,12 @@ export class GamificationComponent implements OnInit {
   public userChecklists;
   public filteredTag = "Pre-Onboarding";
   public allPre = 0;
+  public allOnbrd = 0;
+  public allPost = 0;
   public checkPre = 0;
   public checkPreDb = 0;
+  public checkOnbrdDb = 0;
+  public checkPostDb = 0;
   public checkPreNow = 0;
   public targetID: Array<string>;
   public targetID1: Array<string>;
@@ -50,9 +54,13 @@ export class GamificationComponent implements OnInit {
   j = 1;
   k = 1;
 
+  public isColoured = false;
+
   theResult = 0;
   enemySelected = -1;
   @ViewChild("gender", { static: true }) gender: TemplateRef<any>;
+  @ViewChild("card-body", { static: true }) cardBody: TemplateRef<any>;
+  
   constructor(
     private modalService: NgbModal,
     private authenticationService: AuthenticationService,
@@ -89,12 +97,20 @@ export class GamificationComponent implements OnInit {
           ) {
             this.checkPreDb++;
             this.allPre++;
+          } else if (this.userChecklists[0].lists[i].tags[0].title == "Onboarding") {
+            this.checkOnbrdDb++;
+            this.allOnbrd++;
+          } else if (this.userChecklists[0].lists[i].tags[0].title == "Post-Onboarding") {
+            this.checkPostDb++;
+            this.allPost++;
           }
         } else {
-          if (
-            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
-          ) {
+          if (this.userChecklists[0].list[i].tags[0].title == 'Pre-Onboarding') {
             this.allPre++;
+          } else if (this.userChecklists[0].lists[i].tags[0].title == 'Onboarding') {
+            this.allOnbrd++;
+          } else if (this.userChecklists[0].lists[i].tags[0].title == 'Post-Onboarding') {
+            this.allPost++;
           }
         }
         this.isLoading = false;
@@ -102,7 +118,7 @@ export class GamificationComponent implements OnInit {
         if (this.checkPreDb != this.allPre) {
           this.disabledPreOnboardingList = false;
           this.disabledCompleteButton = true;
-        }
+        } 
         this.userChecklists[0].completed = true;
       }
       this.checkPre = this.checkPreDb;
@@ -294,6 +310,8 @@ export class GamificationComponent implements OnInit {
   reset(): void {
     this.scores = [0, 0];
   }
+
+
 
   // openWindowCustomClass(shopModal) {
   //   this.modalService.open(shopModal, { windowClass: 'shopModal' });
