@@ -18,18 +18,21 @@ import { saveAs } from "file-saver";
   encapsulation: ViewEncapsulation.None,
 })
 export class GamificationComponent implements OnInit {
-  name = "Unicornssss!";
+  public alerts = [];
+  close(index) {
+    this.alerts.splice(index, 1);
+  }
   popup = true;
   registered = false;
-
   isLoading = false;
   public user;
   femalePath: string;
-  // malePath = "assets/avatar/male/";
   avatarSrc;
-
-  //Checklist
+  public points = 0;
   public userChecklists;
+  public all;
+  public totPost = 0;
+  public totOnbrd = 0;
   public allPre = 0;
   public allOnbrd = 0;
   public allPost = 0;
@@ -38,6 +41,9 @@ export class GamificationComponent implements OnInit {
   public checkOnbrdDb = 0;
   public checkPostDb = 0;
   public checkPreNow = 0;
+  public all30 = 0;
+  public all60 = 0;
+  public all90 = 0;
   public targetID: Array<string>;
   public targetID1: Array<string>;
   disabledPreOnboardingList: boolean = false;
@@ -60,6 +66,7 @@ export class GamificationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.alerts);
     if (this.authenticationService.currentUserValue.game == false) {
       this.open(this.gender, "md");
     } else {
@@ -70,60 +77,24 @@ export class GamificationComponent implements OnInit {
       this.authenticationService.currentUserValue.gender +
       "/";
 
-    // this.userService
-    //   .getAll()
-    //   .pipe(first())
-    //   .subscribe((users) => {
     this.user = this.authenticationService.currentUserValue;
     // });
 
     //Checklist
     this.checklist.getUserChecklist().subscribe((data) => {
       this.userChecklists = data;
-
-      for (var i = 0; i < this.userChecklists[0]?.lists.length; i++) {
-        if (this.userChecklists[0].lists[i].checked == true) {
-          if (
-            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
-          ) {
-            this.checkPreDb++;
-            this.allPre++;
-          } else if (
-            this.userChecklists[0].lists[i].tags[0].title == "Onboarding"
-          ) {
-            this.checkOnbrdDb++;
-            this.allOnbrd++;
-          } else if (
-            this.userChecklists[0].lists[i].tags[0].title == "Post-Onboarding"
-          ) {
-            this.checkPostDb++;
-            this.allPost++;
-          }
-        } else {
-          if (
-            this.userChecklists[0].list[i].tags[0].title == "Pre-Onboarding"
-          ) {
-            this.allPre++;
-          } else if (
-            this.userChecklists[0].lists[i].tags[0].title == "Onboarding"
-          ) {
-            this.allOnbrd++;
-          } else if (
-            this.userChecklists[0].lists[i].tags[0].title == "Post-Onboarding"
-          ) {
-            this.allPost++;
-          }
+      for (var i = 0; i < this.userChecklists[0].lists.length; i++) {
+        if (this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding") {
+          this.allPre++;
         }
-        this.isLoading = false;
-
-        if (this.checkPreDb != this.allPre) {
-          this.disabledPreOnboardingList = false;
-          this.disabledCompleteButton = true;
-        }
-        this.userChecklists[0].completed = true;
       }
-      this.checkPre = this.checkPreDb;
+      console.log(this.allPre);
     });
+    // this.allCheck = parseInt(((this.allCheck / this.all) * 100).toString());
+    this.totPost = parseInt(
+      (((this.allPre + this.allOnbrd) / this.all) * 100).toString()
+    );
+    this.totOnbrd = parseInt(((this.allPre / this.all) * 100).toString());
   }
 
   setGender(item) {
@@ -197,6 +168,12 @@ export class GamificationComponent implements OnInit {
         );
 
         if (e.target.checked == true) {
+          this.points = this.points + 10;
+          this.alerts.push({
+            type: "success",
+            message: "You've gained 10 coins!",
+          });
+          setTimeout(() => this.alerts.splice(0, 1), 2000);
           if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow++;
             this.checkPre = this.checkPreDb + this.checkPreNow;
@@ -208,6 +185,12 @@ export class GamificationComponent implements OnInit {
             );
           }
         } else if (e.target.checked == false) {
+          this.points = this.points - 10;
+          this.alerts.push({
+            type: "danger",
+            message: "You've lost 10 coins!",
+          });
+          setTimeout(() => this.alerts.splice(0, 1), 2000);
           if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow--;
             this.checkPre = this.checkPreDb + this.checkPreNow;
@@ -227,6 +210,10 @@ export class GamificationComponent implements OnInit {
           }
         );
       }
+    }
+
+    if (this.checkPreNow == this.allPre) {
+      this.points = this.points + 50;
     }
   }
 

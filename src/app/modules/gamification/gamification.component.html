@@ -12,7 +12,7 @@
             src="assets/icons/coin.svg"
             style="width: 20px; margin-top: -7px; margin-right: -8px"
           />
-          1122
+          {{ points }}
         </span>
       </div>
 
@@ -53,6 +53,18 @@
           >
             Shop
           </button>
+        </div>
+        <div
+          *ngIf="alerts"
+          class="d-inline offset-md-8 position-absolute"
+          style="z-index: 99"
+        >
+          <p *ngFor="let alert of alerts; index as i">
+            <ngb-alert [type]="alert.type" (closed)="close(i)"
+              ><img src="assets/icons/coin.svg" style="width: 18px" />
+              {{ alert.message }}</ngb-alert
+            >
+          </p>
         </div>
       </div>
     </div>
