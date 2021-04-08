@@ -31,19 +31,34 @@ export class GamificationComponent implements OnInit {
   public points = 0;
   public userChecklists;
   public all;
+  public allCheck = 0;
   public totPost = 0;
   public totOnbrd = 0;
   public allPre = 0;
   public allOnbrd = 0;
   public allPost = 0;
   public checkPre = 0;
-  public checkPreDb = 0;
-  public checkOnbrdDb = 0;
-  public checkPostDb = 0;
+  public checkPreDB = 0;
   public checkPreNow = 0;
+  public checkOnbrd = 0;
+  public checkOnbrdNow = 0;
+  public checkOnbrdDB = 0;
+  public checkPost = 0;
+  public checkPostDB = 0;
+  public checkPostNow = 0;
   public all30 = 0;
   public all60 = 0;
   public all90 = 0;
+  public check30 = 0;
+  public check30DB = 0;
+  public check30Now = 0;
+  public check60 = 0;
+  public check60Now = 0;
+  public check60DB = 0;
+  public check90 = 0;
+  public check90DB = 0;
+  public check90Now = 0;
+  public allCheck30 = 0;
   public targetID: Array<string>;
   public targetID1: Array<string>;
   disabledPreOnboardingList: boolean = false;
@@ -66,7 +81,6 @@ export class GamificationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.alerts);
     if (this.authenticationService.currentUserValue.game == false) {
       this.open(this.gender, "md");
     } else {
@@ -84,17 +98,82 @@ export class GamificationComponent implements OnInit {
     this.checklist.getUserChecklist().subscribe((data) => {
       this.userChecklists = data;
       for (var i = 0; i < this.userChecklists[0].lists.length; i++) {
-        if (this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding") {
-          this.allPre++;
+        if (this.userChecklists[0].lists[i].checked == true) {
+          if (
+            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
+          ) {
+            this.checkPreDB++;
+            this.allPre++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[0].title == "Onboarding"
+          ) {
+            this.checkOnbrdDB++;
+            this.allOnbrd++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[0].title == "Post-Onboarding"
+          ) {
+            this.checkPostDB++;
+            this.allPost++;
+          }
+
+          if (this.userChecklists[0].lists[i].tags[1]?.title == "30 Days") {
+            this.check30DB++;
+            this.all30++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[1]?.title == "60 Days"
+          ) {
+            this.check60DB++;
+            this.all60++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[1]?.title == "90 Days"
+          ) {
+            this.check90DB++;
+            this.all90++;
+          }
+        } else {
+          if (
+            this.userChecklists[0].lists[i].tags[0].title == "Pre-Onboarding"
+          ) {
+            this.allPre++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[0].title == "Onboarding"
+          ) {
+            this.allOnbrd++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[0].title == "Post-Onboarding"
+          ) {
+            this.allPost++;
+          }
+
+          if (this.userChecklists[0].lists[i].tags[1]?.title == "30 Days") {
+            this.all30++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[1]?.title == "60 Days"
+          ) {
+            this.all60++;
+          } else if (
+            this.userChecklists[0].lists[i].tags[1]?.title == "90 Days"
+          ) {
+            this.all90++;
+          }
         }
       }
-      console.log(this.allPre);
+      this.all = this.allPre + this.allOnbrd + this.allPost;
+      this.allCheck = this.checkPreDB + this.checkOnbrdDB + this.checkPostDB;
+      this.allCheck = parseInt(((this.allCheck / this.all) * 100).toString());
+
+      this.checkPre = this.checkPreDB;
+      this.checkOnbrd = this.checkOnbrdDB;
+      this.checkPost = this.checkPostDB;
+      this.check30 = this.check30DB;
+      this.check60 = this.check60DB;
+      this.check90 = this.check90DB;
+      this.totPost = parseInt(
+        (((this.allPre + this.allOnbrd) / this.all) * 100).toString()
+      );
+      this.totOnbrd = parseInt(((this.allPre / this.all) * 100).toString());
     });
-    // this.allCheck = parseInt(((this.allCheck / this.all) * 100).toString());
-    this.totPost = parseInt(
-      (((this.allPre + this.allOnbrd) / this.all) * 100).toString()
-    );
-    this.totOnbrd = parseInt(((this.allPre / this.all) * 100).toString());
+    this.onCheckboxChange;
   }
 
   setGender(item) {
@@ -173,16 +252,37 @@ export class GamificationComponent implements OnInit {
             type: "success",
             message: "You've gained 10 coins!",
           });
-          setTimeout(() => this.alerts.splice(0, 1), 2000);
           if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow++;
-            this.checkPre = this.checkPreDb + this.checkPreNow;
+            this.checkPre = this.checkPreDB + this.checkPreNow;
           }
-
+          if (this.targetID[0] == "Onboarding") {
+            this.checkOnbrdNow++;
+            this.checkOnbrd = this.checkOnbrdDB + this.checkOnbrdNow;
+          }
+          if (this.targetID[0] == "Post-Onboarding") {
+            this.checkPostNow++;
+            this.checkPost = this.checkPostDB + this.checkPostNow;
+          }
           if (this.userChecklists[0].lists[i].tags.length == 2) {
             this.targetID1 = new Array(50).fill(
               this.userChecklists[0].lists[i].tags[1].title
             );
+
+            if (this.targetID1[0] == "30 Days") {
+              this.check30Now++;
+              this.check30 = this.check30DB + this.check30Now;
+            }
+
+            if (this.targetID1[0] == "60 Days") {
+              this.check60Now++;
+              this.check60 = this.check60DB + this.check60Now;
+            }
+
+            if (this.targetID1[0] == "90 Days") {
+              this.check90Now++;
+              this.check90 = this.check90DB + this.check90Now;
+            }
           }
         } else if (e.target.checked == false) {
           this.points = this.points - 10;
@@ -190,18 +290,49 @@ export class GamificationComponent implements OnInit {
             type: "danger",
             message: "You've lost 10 coins!",
           });
-          setTimeout(() => this.alerts.splice(0, 1), 2000);
           if (this.targetID[0] == "Pre-Onboarding") {
             this.checkPreNow--;
-            this.checkPre = this.checkPreDb + this.checkPreNow;
+            this.checkPre = this.checkPreDB + this.checkPreNow;
           }
-
+          if (this.targetID[0] == "Onboarding") {
+            this.checkOnbrdNow--;
+            this.checkOnbrd = this.checkOnbrdDB + this.checkOnbrdNow;
+          }
+          if (this.targetID[0] == "Post-Onboarding") {
+            this.checkPostNow--;
+            this.checkPost = this.checkPostDB + this.checkPostNow;
+          }
           if (this.userChecklists[0].lists[i].tags.length == 2) {
             this.targetID1 = new Array(50).fill(
               this.userChecklists[0].lists[i].tags[1].title
             );
+            if (this.targetID1[0] == "30 Days") {
+              this.check30Now--;
+              this.check30 = this.check30DB + this.check30Now;
+            }
+            if (this.targetID1[0] == "60 Days") {
+              this.check60Now--;
+              this.check60 = this.check60DB + this.check60Now;
+            }
+            if (this.targetID1[0] == "90 Days") {
+              this.check90Now--;
+              this.check90 = this.check90DB + this.check90Now;
+            }
           }
         }
+        this.allCheck =
+          this.checkPreDB +
+          this.checkPreNow +
+          this.checkOnbrdDB +
+          this.checkOnbrdNow +
+          this.checkPostDB +
+          this.checkPostNow;
+        var pre = ((this.checkPreDB + this.checkPreNow) / this.allPre) * 33.3;
+        var onb =
+          ((this.checkOnbrdDB + this.checkOnbrdNow) / this.allOnbrd) * 33.3;
+        var post =
+          ((this.checkPostDB + this.checkPostNow) / this.allPost) * 33.3;
+        this.allCheck = pre + onb + post;
 
         this.checklist.updateUserChecklists(this.userChecklists).subscribe(
           () => {},
@@ -212,9 +343,32 @@ export class GamificationComponent implements OnInit {
       }
     }
 
-    if (this.checkPreNow == this.allPre) {
-      this.points = this.points + 50;
-    }
+    // if (this.checkPreNow == this.allPre) {
+    //   this.points = this.points + 50;
+    //   this.alerts.push({
+    //     type: "primary",
+    //     message: "You've gained 50 coins!",
+    //   });
+    // }
+    // if (this.checkOnbrdNow == this.allOnbrd) {
+    //   this.points = this.points + 100;
+    //   this.alerts.push({
+    //     type: "primary",
+    //     message: "You've gained 100 coins!",
+    //   });
+    // }
+    // if (this.checkPostNow == this.allPost) {
+    //   this.points = this.points + 150;
+    //   this.alerts.push({
+    //     type: "primary",
+    //     message: "You've gained 150 coins!",
+    //   });
+    // }
+    setTimeout(() => {
+      for (i = 0; i < this.alerts.length; i++) {
+        this.alerts.splice(i, 1);
+      }
+    }, 3000);
   }
 
   completePreOnboardingList() {

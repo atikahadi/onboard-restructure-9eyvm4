@@ -56,7 +56,7 @@
         </div>
         <div
           *ngIf="alerts"
-          class="d-inline offset-md-8 position-absolute"
+          class="d-inline offset-md-8 position-fixed"
           style="z-index: 99"
         >
           <p *ngFor="let alert of alerts; index as i">
@@ -134,13 +134,12 @@
         My Progress
       </div>
 
-      <div class="d-flex justify-content-end w-50">
-        <img [src]="user.avatar" style="width: 40px" />
-      </div>
-
       <div class="offset-md-1 col-md-10">
+        <div class="d-flex flex-column" [style.width]="allCheck + '%'">
+          <img class="ml-auto" [src]="user.avatar" style="width: 40px" />
+        </div>
         <div class="progress-bar">
-          <div class="w-50"></div>
+          <div [style.width]="allCheck + '%'"></div>
         </div>
       </div>
 
