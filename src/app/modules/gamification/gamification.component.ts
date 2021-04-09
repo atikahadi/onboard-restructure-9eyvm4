@@ -70,7 +70,7 @@ export class GamificationComponent implements OnInit {
   j = 1;
   k = 1;
 
-  @ViewChild("gender", { static: true }) gender: TemplateRef<any>;
+  @ViewChild("start", { static: true }) gender: TemplateRef<any>;
   @ViewChild("card-body", { static: true }) cardBody: TemplateRef<any>;
 
   constructor(

@@ -30,8 +30,6 @@ export class ChecklistComponent implements OnInit {
   theResult = 0;
   enemySelected = -1;
 
-  @ViewChild("start", { static: true }) start: TemplateRef<any>;
-
   constructor(
     private checklist: ChecklistService,
     private router: Router,
@@ -43,8 +41,6 @@ export class ChecklistComponent implements OnInit {
     console.log(this.authenticationService.currentUserValue.game);
     if (this.authenticationService.currentUserValue.game == true) {
       this.router.navigate(["/gamification"]);
-    } else {
-      this.open(this.start);
     }
     this.loading = true;
 
